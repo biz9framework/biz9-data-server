@@ -7,13 +7,12 @@
 const async = require('async');
 const moment = require('moment');
 const {get_guid,w_error} = require("biz9-utility-server");
-const { get_biz9_config } = require("biz9-scriptz");
-const biz9_config = get_biz9_config();
-const MONGO_FULL_URL="mongodb://"+biz9_config.MONGO_USERNAME_PASSWORD+biz9_config.MONGO_IP+":"+biz9_config.MONGO_PORT_ID+"?retryWrites=true&w=majority&maxIdleTimeMS=60000&connectTimeoutMS=150000&socketTimeoutMS=90000&maxPoolSize=900000&maxConnecting=10000";
 const { MongoClient } = require("mongodb");
-const client_db = new MongoClient(MONGO_FULL_URL);
-const get_db_connect_base = (db_name) => {
+client_db = {};
+const get_db_connect_base = (biz9_config,db_name) => {
 	return new Promise((callback) => {
+    const mongo_full_url="mongodb://"+biz9_config.MONGO_USERNAME_PASSWORD+biz9_config.MONGO_IP+":"+biz9_config.MONGO_PORT_ID+"?retryWrites=true&w=majority&maxIdleTimeMS=60000&connectTimeoutMS=150000&socketTimeoutMS=90000&maxPoolSize=900000&maxConnecting=10000";
+        client_db = new MongoClient(mongo_full_url);
 		client_db.connect(db_name).then((data)=> {
 			callback([null,data.db(db_name)]);
 		}).catch(error => {

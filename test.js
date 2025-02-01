@@ -1,14 +1,21 @@
 var request = require('request') , async = require('async')
 const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item_list,get_item,delete_item,get_item_list,delete_item_list,count_item_list } = require("./");
 //const { get_id } = require("biz9-utility-server");
-const {get_guid,w_error} = require("biz9-utility-server");
-const { get_biz9_config } = require("biz9-scriptz");
-const biz9_config = get_biz9_config();
+const {get_guid,w_error,get_id} = require("biz9-utility-server");
 const assert = require('node:assert');
 const APP_TITLE_ID = 'mobile-jan25';
-const ID = 'c7a6648e-76a1-4f63-8e91-c6d2e52110a0';
+const ID = 'a8491cd9-8f69-4da8-80c6-051e51c2fc76';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
+const biz9_config ={
+MONGO_IP:'0.0.0.0',
+MONGO_USERNAME_PASSWORD:'',
+MONGO_PORT_ID:"27019",
+MONGO_SERVER_USER:'admin',
+MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+SSH_KEY:"",
+};
+
 /*
 test_connect
 test_item_update
@@ -27,11 +34,11 @@ describe('test_connect', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-DB-CONNECT-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                    db_connect = data;
                     if(error){
                         throw '--TEST-GET-CLIENT-DB-- '+ error;
                     }
-                    db_connect = data;
                     assert.notEqual(db_connect,null);
                     console.log(data);
                     console.log('--TEST-GET-DB-CONNECT-END--');
@@ -86,7 +93,7 @@ describe('test_item_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE--START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-ERROR '+ error;
                     }
@@ -155,7 +162,7 @@ describe('test_item_again_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE--START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-ERROR '+ error;
                     }
@@ -229,7 +236,7 @@ describe('test_item_list_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE-LIST-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-LIST-ERROR--'+ error;
                     }
@@ -305,7 +312,7 @@ describe('test_item_get', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-ERROR--'+ error;
                     }
@@ -320,14 +327,13 @@ describe('test_item_get', function(){ this.timeout(25000);
             },
             function(call){
                 console.log('--TEST-GET-ITEM-2-START--');
-                console.log('aAAAAAAAA');
                 console.log(DATA_TYPE);
                 console.log(item_test.id);
-                console.log('BBBBBBBB');
                 get_item(db_connect,DATA_TYPE,item_test.id).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-2-ERROR--'+ error;
                     }
+                    console.log(data);
                     item_test = data;
                     assert.notEqual(0,data.id);
                     assert.equal(DATA_TYPE,data.data_type);
@@ -378,7 +384,7 @@ describe('test_blank', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-BLANK-TITLE-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-BLANK-TITLE-ERROR--'+ error;
                     }
@@ -447,7 +453,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-DELETE-ITEM-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-DELETE-ITEM-ERROR--'+ error;
                     }
@@ -515,7 +521,7 @@ describe('list_get_item', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-ITEM-LIST-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-ITEM-LIST-ERROR--'+ error;
                     }
@@ -580,7 +586,7 @@ describe('test_delete_list_item', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-ITEM-DELETE-LIST-START--');
-                get_db_connect(APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
                     if(error){
                         throw '--TEST-ITEM-DELETE-LIST-ERROR--'+ error;
                     }

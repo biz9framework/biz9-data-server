@@ -17,9 +17,10 @@ const get_new_item = (data_type,id) => {
     }
     return {data_type:data_type,id:id};
 }
-const get_db_connect_adapter = (db_name) => {
+const get_db_connect_adapter = (biz9_config,db_name) => {
     return new Promise((callback) => {
-        get_db_connect_main(db_name).then(([error,data]) => {
+        get_db_connect_main(biz9_config,db_name).then(([error,data]) => {
+            data.biz9_config=biz9_config;
             callback([error,data]);
         }).catch(error => {
             w_error("Data-Adapter-Get-DB-Adapter",error);
@@ -46,7 +47,7 @@ const update_item_list_adapter = (db_connect,item_data_list) => {
         let item_data_new_list = [];
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -126,7 +127,7 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
         let cache_connect = {};
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -174,7 +175,7 @@ const get_item_list_adapter = (db_connect,data_type,sql,sort_by,page_current,pag
         let item_data_list = [];
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -218,7 +219,7 @@ const get_item_adapter = (db_connect,data_type,id) => {
         let cache_string_list = [];
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -292,7 +293,7 @@ const delete_item_adapter = (db_connect,data_type,id) => {
         let item_data = get_new_item(data_type,id);
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -398,7 +399,7 @@ const delete_item_list_adapter = (db_connect,data_type,sql) => {
         let item_data_new_list = [];
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
@@ -448,7 +449,7 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
         let item_data = get_new_item(data_type,id);
         async.series([
             function(call) {
-                get_cache_connect_main().then(([error,data]) => {
+                get_cache_connect_main(db_connect.biz9_config).then(([error,data]) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {

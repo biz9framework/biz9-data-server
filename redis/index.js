@@ -6,8 +6,8 @@
  */
 const path = require('path');
 const {get_cache_connect_base,close_cache_connect_base,get_cache_string_base,delete_cache_string_base,set_cache_string_base}  = require('./base.js');
-const get_cache_connect_main = async () => {
-    return [error,data] = await get_cache_connect_base();
+const get_cache_connect_main = async (biz9_config) => {
+    return [error,data] = await get_cache_connect_base(biz9_config);
 }
 const close_cache_connect_main = async (cache_connect) => {
     return [error,data] = await close_cache_connect_base(cache_connect);

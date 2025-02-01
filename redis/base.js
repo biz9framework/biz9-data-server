@@ -1,10 +1,7 @@
 const redis = require('redis');
-//const {w_error} = require("biz9-utility-server");
 const {get_guid,w_error} = require("biz9-utility-server");
-const { get_biz9_config } = require("biz9-scriptz");
-const biz9_config = get_biz9_config();
 
-const get_cache_connect_base = () => {
+const get_cache_connect_base = (biz9_config) => {
 	return new Promise((callback) => {
 		let error = null;
         let set_cache=false;

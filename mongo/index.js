@@ -6,8 +6,8 @@
  */
 const async = require("async");
 const { get_db_connect_base,check_db_connect_base,close_db_connect_base,update_item_base,get_item_base,delete_item_base,get_id_list_base,delete_item_list_base,count_item_list_base}= require("./base.js");
-const get_db_connect_main = async (db_name) => {
-    return [error,data] = await get_db_connect_base(db_name);
+const get_db_connect_main = async (biz9_config,db_name) => {
+    return [error,data] = await get_db_connect_base(biz9_config,db_name);
 }
 const close_db_connect_main = async (db_connect) => {
     return [error,data] = await close_db_connect_base(db_connect);
