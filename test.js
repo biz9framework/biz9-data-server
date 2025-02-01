@@ -17,15 +17,12 @@ SSH_KEY:"",
 };
 
 /*
+ * availble
 test_connect
 test_item_update
 test_item_again_update
 test_item_get
 test_item_delete
-test_item_update_list
-test_item_get_list
-test_item_delete_list
-test_item_list_count
 */
 /* --- BiZ9_CORE_CONFIG-END --- */
 describe('test_connect', function(){ this.timeout(25000);
