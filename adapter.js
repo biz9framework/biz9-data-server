@@ -5,7 +5,7 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Data - Mongo - Base
 */
 const async = require('async');
-const { get_title_url,w_error } = require("biz9-utility");
+const { w_error } = require("biz9-utility-server");
 const {get_db_connect_main,check_db_connect_main,close_db_connect_main,update_item_main,get_item_main,delete_item_main,get_id_list_main,delete_item_list_main,count_item_list_main} = require('./mongo/index.js');
 const {get_cache_connect_main,close_cache_connect_main,get_cache_string_main,delete_cache_string_main,set_cache_string_main} = require('./redis/index.js');
 const DB_TITLE='DB';
@@ -133,18 +133,6 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                     w_error("Data-Adapter-Update-Item-Adapter",error);
                     callback([error,null]);
                 });
-            },
-            function(call) {
-                if(item_data.photo_obj){
-                    delete item_data.photo_obj;
-                }
-                if(item_data.date_obj){
-                    delete item_data.date_obj;
-                }
-                if(item_data.title){
-                    item_data.title_url=get_title_url(item_data.title);
-                }
-                call();
             },
             function(call){
                 update_item_main(db_connect,data_type,item_data).then(([error,data]) => {
