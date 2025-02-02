@@ -131,7 +131,8 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-Adapter",error);
+                    console.log(error);
+                    w_error("Data-Adapter-Update-Item-Adapter",'error');
                     callback([error,null]);
                 });
             },
