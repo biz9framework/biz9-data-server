@@ -145,6 +145,13 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                 });
             },
             function(call){
+                item_data.app_title_id=db_connect.biz9_config.APP_TITLE_ID;
+                if(item_data.id){
+                    item_data.source=DB_TITLE;
+                }
+                call();
+            },
+            function(call){
                 delete_cache_string_main(cache_connect,get_cache_item_attr_list_key(item_data.data_type,item_data.id)).then(([error,data]) => {
                     call();
                 }).catch(error => {
@@ -360,6 +367,7 @@ const get_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                 }
             },
             function(call){
+                item_data.app_title_id=db_connect.biz9_config.APP_TITLE_ID;
                 if(cache_found){
                     item_data.source=CACHE_TITLE;
                     call();

@@ -3,11 +3,12 @@ const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item
 //const { get_id } = require("biz9-utility-server");
 const {get_guid,w_error,get_id} = require("biz9-utility-server");
 const assert = require('node:assert');
-const APP_TITLE_ID = 'mobile-jan25';
-const ID = 'a8491cd9-8f69-4da8-80c6-051e51c2fc76';
+const APP_TITLE_ID = 'mobile-feb3a';
+const ID = '9738646f-0e40-4ef8-abf3-cool';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
 const biz9_config ={
+APP_TITLE_ID:APP_TITLE_ID,
 MONGO_IP:'0.0.0.0',
 MONGO_USERNAME_PASSWORD:'',
 MONGO_PORT_ID:"27019",
