@@ -9,22 +9,22 @@ const moment = require('moment');
 const {get_guid,w_error} = require("biz9-utility-server");
 const { MongoClient } = require("mongodb");
 client_db = {};
-const get_db_connect_base = (biz9_config,db_name) => {
+const get_db_connect_base = (data_config) => {
 	return new Promise((callback) => {
-    const mongo_full_url="mongodb://"+biz9_config.MONGO_USERNAME_PASSWORD+biz9_config.MONGO_IP+":"+biz9_config.MONGO_PORT_ID+"?retryWrites=true&w=majority&maxIdleTimeMS=60000&connectTimeoutMS=150000&socketTimeoutMS=90000&maxPoolSize=900000&maxConnecting=10000";
+    const mongo_full_url="mongodb://"+data_config.MONGO_USERNAME_PASSWORD+data_config.MONGO_IP+":"+data_config.MONGO_PORT_ID+"?retryWrites=true&w=majority&maxIdleTimeMS=60000&connectTimeoutMS=150000&socketTimeoutMS=90000&maxPoolSize=900000&maxConnecting=10000";
         client_db = new MongoClient(mongo_full_url);
-		client_db.connect(db_name).then((data)=> {
-			callback([null,data.db(db_name)]);
+		client_db.connect(data_config.APP_TITLE_ID).then((data)=> {
+			callback([null,data.db(data_config.APP_TITLE_ID)]);
 		}).catch(error => {
 			w_error("Data-Mongo-Base-Get-DB-BASE-Error--",error);
-			var reset_cmd = "sudo mongod --fork --config "+biz9_config.mongo_config;
-			if(data_config.mongo_ip!='0.0.0.0'){
-				if(!data_config.ssh_key){
-					data_config.ssh_key='';
+			var reset_cmd = "sudo mongod --fork --config "+data_config.MONGO_CONFIG;
+			if(data_config.MONGO_IP!='0.0.0.0'){
+				if(!data_config.SSH_KEY){
+					data_config.SSH_KEY='';
 				}else{
-					biz9_config.ssh_key=' -i '+ biz9_config.ssh_key;
+					data_config.SSH_KEY=' -i '+ data_config.SSH_KEY;
 				}
-				reset_cmd = 'ssh '+ biz9_config.ssh_key + " " +biz9_config.mongo_server_user +"@"+biz9_config.mongo_ip +" -- "+reset_cmd;
+				reset_cmd = 'ssh '+ data_config.SSH_KEY + " " +data_config.MONGO_SERVER_USER +"@"+data_config.MONGO_IP +" -- "+reset_cmd;
 			}
 			dir = exec(reset_cmd, function(error,stdout,stderr){
 			});

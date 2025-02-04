@@ -1,11 +1,11 @@
 const redis = require('redis');
 const {get_guid,w_error} = require("biz9-utility-server");
 
-const get_cache_connect_base = (biz9_config) => {
+const get_cache_connect_base = (data_config) => {
 	return new Promise((callback) => {
 		let error = null;
         let set_cache=false;
-        let client_redis = redis.createClient(biz9_config.redis_port_id,biz9_config.redis_url);
+        let client_redis = redis.createClient(data_config.REDIS_PORT_ID,data_config.REDIS_URL);
 		client_redis.connect().then((data) => {
 			callback([null,data]);
         }).catch(error => {

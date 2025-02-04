@@ -3,19 +3,27 @@ const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item
 //const { get_id } = require("biz9-utility-server");
 const {get_guid,w_error,get_id} = require("biz9-utility-server");
 const assert = require('node:assert');
-const APP_TITLE_ID = 'mobile-feb3a';
-const ID = '9738646f-0e40-4ef8-abf3-cool';
+const APP_TITLE_ID = 'mobile-feb4b';
+
+/* --- TEST CONFIG START --- */
+const ID = 'db8ecde2-5ed0-4cc2-8a9e-84a085fdc3a9';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
-const biz9_config ={
-APP_TITLE_ID:APP_TITLE_ID,
-MONGO_IP:'0.0.0.0',
-MONGO_USERNAME_PASSWORD:'',
-MONGO_PORT_ID:"27019",
-MONGO_SERVER_USER:'admin',
-MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-SSH_KEY:"",
+/* --- TEST CONFIG END --- */
+
+/* --- DATA CONFIG START --- */
+const data_config ={
+    APP_TITLE_ID:APP_TITLE_ID,
+    MONGO_IP:'0.0.0.0',
+    MONGO_USERNAME_PASSWORD:'',
+    MONGO_PORT_ID:"27019",
+    MONGO_SERVER_USER:'admin',
+    MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+    SSH_KEY:"",
+    REDIS_URL:"0.0.0.0",
+    REDIS_PORT_ID:"27019"
 };
+/* --- DATA CONFIG END --- */
 
 /*
  * availble
@@ -32,7 +40,7 @@ describe('test_connect', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-DB-CONNECT-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     db_connect = data;
                     if(error){
                         throw '--TEST-GET-CLIENT-DB-- '+ error;
@@ -91,7 +99,7 @@ describe('test_item_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE--START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-ERROR '+ error;
                     }
@@ -160,7 +168,7 @@ describe('test_item_again_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE--START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-ERROR '+ error;
                     }
@@ -234,7 +242,7 @@ describe('test_item_list_update', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-UPDATE-LIST-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-UPDATE-LIST-ERROR--'+ error;
                     }
@@ -310,7 +318,7 @@ describe('test_item_get', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-ERROR--'+ error;
                     }
@@ -382,7 +390,7 @@ describe('test_blank', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-GET-ITEM-BLANK-TITLE-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-BLANK-TITLE-ERROR--'+ error;
                     }
@@ -451,7 +459,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-DELETE-ITEM-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-DELETE-ITEM-ERROR--'+ error;
                     }
@@ -519,7 +527,7 @@ describe('list_get_item', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-ITEM-LIST-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-ITEM-LIST-ERROR--'+ error;
                     }
@@ -584,7 +592,7 @@ describe('test_delete_list_item', function(){ this.timeout(25000);
         async.series([
             function(call){
                 console.log('--TEST-ITEM-DELETE-LIST-START--');
-                get_db_connect(biz9_config,APP_TITLE_ID).then(([error,data])=> {
+                get_db_connect(data_config).then(([error,data])=> {
                     if(error){
                         throw '--TEST-ITEM-DELETE-LIST-ERROR--'+ error;
                     }
@@ -739,6 +747,6 @@ function get_test_item(){
     return item_test;
 }
 const get_new_item = (data_type,id) =>{
-  return {data_type:data_type,id:id};
+    return {data_type:data_type,id:id};
 }
 
