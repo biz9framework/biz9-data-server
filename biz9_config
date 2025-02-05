@@ -1,4 +1,4 @@
-VERSION='1.3.66'
+VERSION='1.3.67'
 TITLE='BiZ9-Data-Server'
 REPO='git@github.com:biz9framework/biz9-data-server.git'
 BRANCH='main'

@@ -5,7 +5,6 @@ License GNU General Public License v3.0
 Description: BiZ9 Framework: Data - Mongo - Base
 */
 const async = require('async');
-const { w_error } = require("biz9-utility-server");
 const {get_db_connect_main,check_db_connect_main,close_db_connect_main,update_item_main,get_item_main,delete_item_main,get_id_list_main,delete_item_list_main,count_item_list_main} = require('./mongo/index.js');
 const {get_cache_connect_main,close_cache_connect_main,get_cache_string_main,delete_cache_string_main,set_cache_string_main} = require('./redis/index.js');
 const DB_TITLE='DB';
@@ -20,10 +19,14 @@ const get_new_item = (data_type,id) => {
 const get_db_connect_adapter = (data_config) => {
     return new Promise((callback) => {
         get_db_connect_main(data_config).then(([error,data]) => {
+            console.log('aaaaaaaa');
+            console.log(data);
+            console.log('aaaaaaaa');
             data.data_config=data_config;
             callback([error,data]);
         }).catch(error => {
-            w_error("Data-Adapter-Get-DB-Adapter",error);
+            console.log("Data-Adapter-Get-DB-Adapter");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -33,7 +36,8 @@ const close_db_connect_adapter = (db_connect) => {
         close_db_connect_main(db_connect).then(([error,data])=> {
             callback([error,data]);
         }).catch(error => {
-            w_error("Data-Adapter-Close-DB-Connect-Adapter",error);
+            console.log("Data-Adapter-Close-DB-Connect-Adapter");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -51,7 +55,8 @@ const update_item_list_adapter = (db_connect,item_data_list) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-List-Adapter",error);
+                    console.log("Data-Adapter-Update-Item-List-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -81,14 +86,16 @@ const update_item_list_adapter = (db_connect,item_data_list) => {
                                 delete_cache_string_main(cache_connect,get_cache_item_attr_list_key(item.data_type,data.id)).then(([error,data]) => {
                                     go();
                                 }).catch(error => {
-                                    w_error("Data-Adapter-Update-Item-List-2",error);
+                                    console.log("Data-Adapter-Update-Item-List-2");
+                                    console.log(error);
                                     callback([error,null]);
                                 });
                             }else{
                                 go();
                             }
                         }).catch(error => {
-                            w_error("Data-Adapter-Update-Item-List-3",error);
+                            console.log("Data-Adapter-Update-Item-List-3");
+                            console.log(error);
                             callback([error,null]);
                         });
                     }else{
@@ -110,14 +117,16 @@ const update_item_list_adapter = (db_connect,item_data_list) => {
                 close_cache_connect_main(cache_connect).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-List-4-Error",error);
+                    console.log("Data-Adapter-Update-Item-List-4-Error");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
         ]).then(result => {
             callback([error,item_data_new_list]);
         }).catch(error => {
-            w_error("Data-Adapter-Update-Item-List-5",error);
+            console.log("Data-Adapter-Update-Item-List-5");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -131,7 +140,8 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-Adapter",'error');
+                    console.log("Data-Adapter-Update-Item-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -139,7 +149,8 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                 update_item_main(db_connect,data_type,item_data).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-Adapter-2",error);
+                    console.log("Data-Adapter-Update-Item-Adapter-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -154,7 +165,8 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                 delete_cache_string_main(cache_connect,get_cache_item_attr_list_key(item_data.data_type,item_data.id)).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-Adapter-3",error);
+                    console.log("Data-Adapter-Update-Item-Adapter-3");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -162,14 +174,16 @@ const update_item_adapter = (db_connect,data_type,item_data) => {
                 close_cache_connect_main(cache_connect).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Update-Item-Adapter-4",error);
+                    console.log("Data-Adapter-Update-Item-Adapter-4");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Data-Adapter-Update-Item-Adapter-END",error);
+            console.log("Data-Adapter-Update-Item-Adapter-END");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -186,7 +200,8 @@ const get_item_list_adapter = (db_connect,data_type,sql,sort_by,page_current,pag
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Get-Item-List-Adapter",error);
+                    console.log("Get-Item-List-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -197,7 +212,8 @@ const get_item_list_adapter = (db_connect,data_type,sql,sort_by,page_current,pag
                     item_id_list=data_list;
                     call();
                 }).catch(error => {
-                    w_error("Get-Item-List-Adapter-2",error);
+                    console.log("Get-Item-List-Adapter-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -212,7 +228,8 @@ const get_item_list_adapter = (db_connect,data_type,sql,sort_by,page_current,pag
         ]).then(result => {
             callback([error,item_data_list,item_data_count,Math.round(item_data_count/page_size+1)]);
         }).catch(error => {
-            w_error("Get-Item-List-Adapter-3",error);
+            console.log("Get-Item-List-Adapter-3");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -230,7 +247,8 @@ const get_item_adapter = (db_connect,data_type,id) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter",error);
+                    console.log("Adapter-Get-Item-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -239,7 +257,8 @@ const get_item_adapter = (db_connect,data_type,id) => {
                     item_data = data;
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter-2",error);
+                    console.log("Adapter-Get-Item-Adapter-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -247,14 +266,16 @@ const get_item_adapter = (db_connect,data_type,id) => {
                 close_cache_connect_main(cache_connect).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter-3",error);
+                    console.log("Adapter-Get-Item-Adapter-3");
+                    console.log(error);
                     callback([error,null]);
                 });
             }
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Adapter-Get-Item-Adapter-4",error);
+            console.log("Adapter-Get-Item-Adapter-4");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -282,14 +303,16 @@ const set_cache_item = (cache_connect,data_type,id,item_data) => {
                     set_cache_string_main(cache_connect,get_cache_item_attr_list_key(data_type,id),cache_string_str).then(([error,data]) => {
                         call();
                     }).catch(error => {
-                        w_error("Data-Adapter-Set-Cache-Item",error);
+                        console.log("Data-Adapter-Set-Cache-Item");
+                        console.log(error);
                         callback([error,null]);
                     });
             },
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Data-Adapter-Set-Cache-Item-2",error);
+            console.log("Data-Adapter-Set-Cache-Item-2");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -304,7 +327,8 @@ const delete_item_adapter = (db_connect,data_type,id) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter",error);
+                    console.log("Adapter-Get-Item-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -313,7 +337,8 @@ const delete_item_adapter = (db_connect,data_type,id) => {
                     item_data = data;
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter-2",error);
+                    console.log("Adapter-Get-Item-Adapter-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -321,14 +346,16 @@ const delete_item_adapter = (db_connect,data_type,id) => {
                 close_cache_connect_main(cache_connect).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Adapter-Get-Item-Adapter-3",error);
+                    console.log("Adapter-Get-Item-Adapter-3");
+                    console.log(error);
                     callback([error,null]);
                 });
             }
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Adapter-Get-Item-Adapter-4",error);
+            console.log("Adapter-Get-Item-Adapter-4");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -345,7 +372,8 @@ const get_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                     cache_key_list=data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Get-Item-Cache-DB",error);
+                    console.log("Data-Adapter-Get-Item-Cache-DB");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -379,7 +407,8 @@ const get_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                             set_cache_item(cache_connect,data_type,id,data).then(([error,data2]) => {
                                 call();
                             }).catch(error => {
-                                w_error("Data-Adapter-Get-Item-Cache-DB-2",error);
+                                console.log("Data-Adapter-Get-Item-Cache-DB-2");
+                                console.log(error);
                                 callback([error,null]);
                             });
                         }else{
@@ -387,7 +416,8 @@ const get_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                             call();
                         }
                     }).catch(error => {
-                        w_error("Data-Adapter-Get-Item-Cache-DB-3",error);
+                        console.log("Data-Adapter-Get-Item-Cache-DB-3");
+                        console.log(error);
                         callback([error,null]);
                     });
                 }
@@ -395,7 +425,8 @@ const get_item_cache_db = (cache_connect,db_connect,data_type,id) => {
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Data-Adapter-Get-Item-Cache-DB",error);
+            console.log("Data-Adapter-Get-Item-Cache-DB");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -411,7 +442,8 @@ const delete_item_list_adapter = (db_connect,data_type,sql) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-List-Adapter",error);
+                    console.log("Data-Adapter-Delete-Item-List-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -422,7 +454,8 @@ const delete_item_list_adapter = (db_connect,data_type,sql) => {
                     item_id_list=data_list;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-List-Adapter-2",error);
+                    console.log("Data-Adapter-Delete-Item-List-Adapter-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -430,7 +463,8 @@ const delete_item_list_adapter = (db_connect,data_type,sql) => {
                 delete_item_list_main(db_connect,data_type,sql).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-List-Adapter",error);
+                    console.log("Data-Adapter-Delete-Item-List-Adapter");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -444,7 +478,8 @@ const delete_item_list_adapter = (db_connect,data_type,sql) => {
         ]).then(result => {
             callback([error,item_data_new_list]);
         }).catch(error => {
-            w_error("Data-Adapter-Delete-Item-List-Adapter-3",error);
+            console.log("Data-Adapter-Delete-Item-List-Adapter-3");
+            console.log(error);
             callback([error,null]);
         });
     });
@@ -461,7 +496,8 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                     cache_connect = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-Cache-DB",error);
+                    console.log("Data-Adapter-Delete-Item-Cache-DB");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -470,7 +506,8 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                     cache_key_list=data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Get-Item-Cache-DB",error);
+                    console.log("Data-Adapter-Get-Item-Cache-DB");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -489,7 +526,8 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                     item_data.cache_del = true;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-Cache-DB-2",error);
+                    console.log("Data-Adapter-Delete-Item-Cache-DB-2");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -498,7 +536,8 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                     item_data.db_del = true;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-Cache-DB-3",error);
+                    console.log("Data-Adapter-Delete-Item-Cache-DB-3");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
@@ -506,15 +545,17 @@ const delete_item_cache_db = (cache_connect,db_connect,data_type,id) => {
                 close_cache_connect_main(cache_connect).then(([error,data]) => {
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Delete-Item-Cache-DB-4",error);
+                    console.log("Data-Adapter-Delete-Item-Cache-DB-4");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
         ]).then(result => {
             callback([error,item_data]);
         }).catch(error => {
-            w_error("Data-Adapter-Delete-Item-Cache-DB-5",error);
-                    callback([error,null]);
+            console.log("Data-Adapter-Delete-Item-Cache-DB-5");
+            console.log(error);
+            callback([error,null]);
         });
     });
 }
@@ -527,14 +568,16 @@ const count_item_list_adapter = (db_connect,data_type,sql) => {
                     item_list_count = data;
                     call();
                 }).catch(error => {
-                    w_error("Data-Adapter-Count-Item-List",error);
+                    console.log("Data-Adapter-Count-Item-List");
+                    console.log(error);
                     callback([error,null]);
                 });
             },
         ]).then(result => {
             callback([error,item_list_count]);
         }).catch(error => {
-            w_error("Data-Adapter-Count-Item-List",error);
+            console.log("Data-Adapter-Count-Item-List");
+            console.log(error);
             callback([error,null]);
         });
     });

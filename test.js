@@ -1,12 +1,12 @@
 var request = require('request') , async = require('async')
 const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item_list,get_item,delete_item,get_item_list,delete_item_list,count_item_list } = require("./");
 //const { get_id } = require("biz9-utility-server");
-const {get_guid,w_error,get_id} = require("biz9-utility-server");
+const {get_guid,get_id} = require("biz9-utility-server");
 const assert = require('node:assert');
 const APP_TITLE_ID = 'mobile-feb4b';
 
 /* --- TEST CONFIG START --- */
-const ID = 'db8ecde2-5ed0-4cc2-8a9e-84a085fdc3a9';
+const ID = '9a2a6617-b437-44c8-aa92-4722f17190f8';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
 /* --- TEST CONFIG END --- */
@@ -39,7 +39,7 @@ describe('test_connect', function(){ this.timeout(25000);
         let db_connect = {};
         async.series([
             function(call){
-                console.log('--TEST-GET-DB-CONNECT-START--');
+                console.log('--TEST-GET-DB-CONNECT-LOCAL-START--');
                 get_db_connect(data_config).then(([error,data])=> {
                     db_connect = data;
                     if(error){
@@ -47,7 +47,7 @@ describe('test_connect', function(){ this.timeout(25000);
                     }
                     assert.notEqual(db_connect,null);
                     console.log(data);
-                    console.log('--TEST-GET-DB-CONNECT-END--');
+                    console.log('--TEST-GET-DB-CONNECT-LOCAL-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -61,7 +61,7 @@ describe('test_connect', function(){ this.timeout(25000);
                         throw '--TEST-GET-CLIENT-DB-CONNECT-CHECK-- '+ error;
                     }
                     console.log(data);
-                    console.log('--TEST-GET-DB-CONNECT-2-END--');
+                    console.log('--TEST-GET-DB-CONNECT-CHECK-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -69,7 +69,6 @@ describe('test_connect', function(){ this.timeout(25000);
                 }
             },
             function(call){
-                console.log('--TEST-GET-DB-CONNECT-3-END--');
                 close_db_connect(db_connect).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-CLIENT-DB-CHECK-CLOSE-- '+ error;
@@ -77,7 +76,7 @@ describe('test_connect', function(){ this.timeout(25000);
                     db_connect = data;
                     assert.equal(db_connect,null);
                     console.log(data);
-                    console.log('--TEST-GET-DB-CONNECT-4-END--');
+                    console.log('--TEST-GET-DB-CONNECT-CLOSE-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -86,6 +85,9 @@ describe('test_connect', function(){ this.timeout(25000);
             },
         ],
             function(error, result){
+                console.log('--TEST-GET-DB-CONNECT-LOCAL-SUCCESS--');
+                console.log('--TEST-GET-DB-CONNECT-CHECK-SUCCESS--');
+                console.log('--TEST-GET-DB-CONNECT-CLOSE-SUCCESS--');
                 console.log('--TEST-GET-DB-CONNECT--DONE--');
                 done();
             });
@@ -105,7 +107,7 @@ describe('test_item_update', function(){ this.timeout(25000);
                     }
                     db_connect = data;
                     assert.notEqual(db_connect,null);
-                    console.log('--TEST-GET-ITEM-UPDATE--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -121,7 +123,7 @@ describe('test_item_update', function(){ this.timeout(25000);
                     item_test = data;
                     assert.notEqual(data,null);
                     console.log(item_test);
-                    console.log('--TEST-GET-ITEM-UPDATE-2--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE-2--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -136,7 +138,7 @@ describe('test_item_update', function(){ this.timeout(25000);
                     }
                     db_connect=data;
                     assert.equal(data,null);
-                    console.log('--TEST-GET-ITEM-UPDATE-3--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE-3--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -150,11 +152,15 @@ describe('test_item_update', function(){ this.timeout(25000);
                 assert.notEqual(item_test.id,0);
                 assert.notEqual(item_test.id,null);
                 assert.equal(null,db_connect);
-                console.log('--TEST-GET-ITEM-UPDATE-Assert--END--');
+                console.log('--TEST-GET-ITEM-UPDATE-Assert--SUCCESS--');
                 call();
             },
         ],
             function(error, result){
+                console.log('--TEST-GET-ITEM-UPDATE--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-2--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-3--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-Assert--SUCCESS--');
                 console.log('--TEST-GET-ITEM-UPDATE--DONE--');
                 done();
             });
@@ -174,7 +180,7 @@ describe('test_item_again_update', function(){ this.timeout(25000);
                     }
                     db_connect = data;
                     assert.notEqual(db_connect,null);
-                    console.log('--TEST-GET-ITEM-UPDATE--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -191,7 +197,7 @@ describe('test_item_again_update', function(){ this.timeout(25000);
                     }
                     item_test = data;
                     console.log(item_test);
-                    console.log('--TEST-GET-ITEM-UPDATE-2--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE-2--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -205,7 +211,7 @@ describe('test_item_again_update', function(){ this.timeout(25000);
                         throw '--TEST-GET-ITEM-UPDATE-3-- '+ error;
                     }
                     db_connect=data;
-                    console.log('--TEST-GET-ITEM-UPDATE-3--END--');
+                    console.log('--TEST-GET-ITEM-UPDATE-3--SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -223,7 +229,10 @@ describe('test_item_again_update', function(){ this.timeout(25000);
                 assert.notEqual(item_test.id,0);
                 assert.notEqual(item_test.id,null);
                 assert.equal(null,db_connect);
-                console.log('--TEST-GET-ITEM-UPDATE-Assert--END--');
+                console.log('--TEST-GET-ITEM-UPDATE--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-2--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-3--SUCCESS--');
+                console.log('--TEST-GET-ITEM-UPDATE-Assert--SUCCESS--');
                 call();
             },
         ],
@@ -324,7 +333,7 @@ describe('test_item_get', function(){ this.timeout(25000);
                     }
                     db_connect = data;
                     assert.notEqual(db_connect,null);
-                    console.log('--TEST-GET-ITEM-END--');
+                    console.log('--TEST-GET-ITEM-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -343,7 +352,7 @@ describe('test_item_get', function(){ this.timeout(25000);
                     item_test = data;
                     assert.notEqual(0,data.id);
                     assert.equal(DATA_TYPE,data.data_type);
-                    console.log('--TEST-GET-ITEM-2-END--');
+                    console.log('--TEST-GET-ITEM-2-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -352,32 +361,36 @@ describe('test_item_get', function(){ this.timeout(25000);
             },
             function(call){
                 close_db_connect(db_connect).then(([error,data])=> {
-                    console.log('--TEST-GET-ITEM-BLANK-TITLE-4-START--');
+                    console.log('--TEST-GET-ITEM-4-START--');
                     if(error){
-                        throw '--TEST-GET-ITEM-BLANK-TITLE-4-ERROR--'+ error;
+                        throw '--TEST-GET-ITEM-4-ERROR--'+ error;
                     }
                     db_connect=data;
                     assert.equal(db_connect,null);
-                    console.log('--TEST-GET-ITEM-BLANK-TITLE-4-END--');
+                    console.log('--TEST-GET-ITEM-4-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
-                    console.error("--TEST-GET-ITEM-BLANK-TITLE-4-ERROR--",error);
+                    console.error("--TEST-GET-ITEM-4-ERROR--",error);
                 }
             },
             function(call){
-                console.log('--TEST-GET-ITEM-BLANK-TITLE-ASSERT-START--');
+                console.log('--TEST-GET-ITEM-ASSERT-START--');
                 assert.notEqual(item_test.first_name,0);
                 assert.notEqual(item_test.first_name,null);
                 assert.notEqual(item_test.id,0);
                 assert.notEqual(item_test.id,null);
                 assert.equal(null,db_connect);
-                console.log('--TEST-GET-ITEM-BLANK-TITLE-ASSERT-END--');
+                console.log('--TEST-GET-ITEM-ASSERT-SUCCESS--');
                 call();
             },
         ],
             function(error, result){
-                console.log('--TEST-GET-ITEM-BLANK-TITLE-DONE--');
+                console.log('--TEST-GET-ITEM-SUCCESS--');
+                console.log('--TEST-GET-ITEM-2-SUCCESS--');
+                console.log('--TEST-GET-ITEM-4-SUCCESS--');
+                console.log('--TEST-GET-ITEM-ASSERT-SUCCESS--');
+                console.log('--TEST-GET-ITEM-DONE--');
                 done();
             });
     });
@@ -465,7 +478,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
                     }
                     db_connect = data;
                     assert.notEqual(db_connect,null);
-                    console.log('--TEST-DELETE-ITEM-END--');
+                    console.log('--TEST-DELETE-ITEM-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -480,7 +493,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
                     }
                     item_test = data;
                     console.log(item_test);
-                    console.log('--TEST-DELETE-ITEM-2-END--');
+                    console.log('--TEST-DELETE-ITEM-2-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -495,7 +508,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
                     }
                     db_connect=data;
                     assert.equal(db_connect,null);
-                    console.log('--TEST-DELETE-ITEM-4-END--');
+                    console.log('--TEST-DELETE-ITEM-4-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
                 function handleError(error) {
@@ -503,7 +516,7 @@ describe('test_item_delete', function(){ this.timeout(25000);
                 }
             },
             function(call){
-                console.log('--TEST-DELETE-ITEM-ASSERT-START--');
+                console.log('--TEST-DELETE-ITEM-ASSERT-SUCCESS--');
                 assert.equal(item_test.cache_del,true);
                 assert.equal(item_test.db_del,true);
                 console.log('--TEST-GET-ITEM-BLANK-TITLE-ASSERT-END--');
@@ -511,7 +524,9 @@ describe('test_item_delete', function(){ this.timeout(25000);
             },
         ],
             function(error, result){
-                console.log('--TEST-GET-ITEM-BLANK-TITLE-DONE--');
+                console.log('--TEST-DELETE-ITEM-SUCCESS--');
+                console.log('--TEST-GET-DELETE-2-START--');
+                console.log('--TEST-GET-ITEM-BLANK-TITLE-ASSERT-END--');
                 done();
             });
     });
