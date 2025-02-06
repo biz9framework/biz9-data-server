@@ -3,10 +3,10 @@ const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item
 //const { get_id } = require("biz9-utility-server");
 const {get_guid,get_id} = require("biz9-utility-server");
 const assert = require('node:assert');
-const APP_TITLE_ID = 'mobile-feb4b';
+const APP_TITLE_ID = 'feb6a';
 
 /* --- TEST CONFIG START --- */
-const ID = 'adaeef08-08ab-4d23-ae9d-d6be84f26de4';
+const ID = 'c4848fbb-888d-429d-897f-fab8a50f2143';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
 /* --- TEST CONFIG END --- */

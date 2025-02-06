@@ -40,7 +40,7 @@ const close_db_connect_base = (db_connect) => {
 		client_db.close().then((data)=> {
 			callback([error,null]);
 		}).catch(error => {
-			console.log("Data-Mongo-Base-Close-DB-Base",error);
+			console.log("Data-Mongo-Base-Close-DB-Base");
 			console.log(error);
 			callback([error,null]);
 		});

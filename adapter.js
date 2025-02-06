@@ -19,9 +19,6 @@ const get_new_item = (data_type,id) => {
 const get_db_connect_adapter = (data_config) => {
     return new Promise((callback) => {
         get_db_connect_main(data_config).then(([error,data]) => {
-            console.log('aaaaaaaa');
-            console.log(data);
-            console.log('aaaaaaaa');
             data.data_config=data_config;
             callback([error,data]);
         }).catch(error => {
