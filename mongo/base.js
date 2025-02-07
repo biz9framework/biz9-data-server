@@ -6,7 +6,7 @@
  */
 const async = require('async');
 const moment = require('moment');
-const {get_guid} = require("biz9-utility-server");
+const {get_guid,w_error} = require("biz9-utility");
 const { MongoClient } = require("mongodb");
 let client_db = {};
 const get_db_connect_base = (data_config) => {
@@ -16,8 +16,7 @@ const get_db_connect_base = (data_config) => {
 		client_db.connect(data_config.APP_TITLE_ID).then((data)=> {
 			callback([null,data.db(data_config.APP_TITLE_ID)]);
 		}).catch(error => {
-			console.log("Data-Mongo-Base-Get-DB-BASE-Error--");
-			console.log(error);
+			w_error("Data-Mongo-Base-Get-DB-BASE-Error--",error);
 			var reset_cmd = "sudo mongod --fork --config "+data_config.MONGO_CONFIG;
 			if(data_config.MONGO_IP!='0.0.0.0'){
 				if(!data_config.SSH_KEY){
@@ -40,8 +39,7 @@ const close_db_connect_base = (db_connect) => {
 		client_db.close().then((data)=> {
 			callback([error,null]);
 		}).catch(error => {
-			console.log("Data-Mongo-Base-Close-DB-Base");
-			console.log(error);
+			w_error("Data-Mongo-Base-Close-DB-Base-Error",error);
 			callback([error,null]);
 		});
 	});
@@ -54,8 +52,7 @@ const get_item_base = (db_connect,data_type,id) => {
 			collection.findOne({id:id}).then((data) => {
 				callback([error,data]);
 			}).catch(error => {
-				console.log("Data-Base-Get-Item-Base");
-				console.log(error);
+				console.log("Data-Base-Get-Item-Base-Error",error);
 				callback([error,null]);
 			});
 		}
@@ -87,8 +84,7 @@ const update_item_base = (db_connect,data_type,item) => {
 					delete item['_id'];
 					callback([error,item]);
 				}).catch(error => {
-					console.log("Data-Mongo-Base-Update-Item-Base");
-					console.log(error);
+					w_error("Data-Mongo-Base-Update-Item-Base-Error",error);
 					callback([error,null]);
 				});
 			}
@@ -98,8 +94,7 @@ const update_item_base = (db_connect,data_type,item) => {
 				delete item['_id'];
 				callback([error,item]);
 			}).catch(error => {
-				console.log("Data-Mongo-Base-Update-Item-Base");
-				console.log(error);
+				w_error("Data-Mongo-Base-Update-Item-Base-Error",error);
 				callback([error,null]);
 			});
 		}
@@ -112,8 +107,7 @@ const delete_item_base = (db_connect,data_type,id) => {
 			collection.deleteMany({id:id}).then((data) => {
 				callback([error,data]);
 			}).catch(error => {
-				console.log("Data-Mongo-Base-Delete-Item-Base");
-				console.log(error);
+				w_error("Data-Mongo-Base-Delete-Item-Base-Error",error);
 				callback([error,null]);
 			});
 		}
@@ -126,8 +120,7 @@ const delete_item_list_base = (db_connect,data_type,sql) => {
 			collection.deleteMany(sql).then((data) => {
 				callback([error,data]);
 			}).catch(error => {
-				console.log("Data-Mongo-Base-Delete-List-Base");
-				console.log(error);
+				w_error("Data-Mongo-Base-Delete-List-Base-Error",error);
 				callback([error,null]);
 			});
 		}
@@ -145,12 +138,12 @@ const get_id_list_base = (db_connect,data_type,sql_obj,sort_by,page_current,page
 						total_count = data;
 						call();
 					}).catch(error => {
-						console.log("Data-Mongo-Base-Get-Sql-Paging-TblId-Base");
-						console.log(error);
+						w_error("Data-Mongo-Base-Get-Sql-Paging-TblId-Bas-Errore",error);
 						callback([error,null]);
 					});
 				}else{
-					console.log("Data-Mongo-Base-Get-Sql-Paging-TblId-Base");
+					w_error("Data-Mongo-Base-Get-Sql-Paging-TblId-Base-Error",error);
+					callback(['No connection',null]);
 				}
 			},
 			function(call) {
@@ -159,21 +152,18 @@ const get_id_list_base = (db_connect,data_type,sql_obj,sort_by,page_current,page
 						data_list = data;
 						call();
 					}).catch(error => {
-						console.log("Data-Mongo-Base-Get-Sql-Paging-TblId-Base");
-						console.log(error);
+						w_error("Data-Mongo-Base-Get-Sql-Paging-TblId-Base-Error",error);
 						callback([error,null]);
 					});
 				}else{
-					console.log("Data-Mongo-Base-Get-Sql-Paging-TblId-Base");
-					console.log('No connection');
-					callback(['No connection',null]);
+					w_error("Data-Mongo-Base-Get-Sql-Paging-TblId-Base-Error",error);
+                    callback(['No connection',null]);
 				}
 			}
 		]).then(result => {
 			callback([error,total_count,data_list]);
 		}).catch(error => {
-			console.log("Project-FileName-Update-Blank");
-			console.log(error);
+			w_error("Project-FileName-Update-Blank-Error",error);
 			callback([error,null]);
 		});
 	});
@@ -185,8 +175,7 @@ const count_item_list_base = (db_connect,data_type,sql) => {
 			collection.countDocuments(sql).then((data) => {
 				callback([error,data]);
 			}).catch(error => {
-				console.log("Data-Mongo-Base-Count-Item-List-Base");
-				console.log(error);
+				w_error("Data-Mongo-Base-Count-Item-List-Base-Error",error);
 				callback([error,null]);
 			});
 		}

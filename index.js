@@ -18,7 +18,6 @@ const update_item = async (db_connect,data_type,item_data) => {
     return [error,data] = await update_item_adapter(db_connect,data_type,item_data);
 };
 const get_item = async (db_connect,data_type,id) => {
-    [error,data] = await get_item_adapter(db_connect,data_type,id);
     return [error,data] = await get_item_adapter(db_connect,data_type,id);
 };
 const update_item_list = async (db_connect,item_data_list) => {

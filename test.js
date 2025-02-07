@@ -6,7 +6,7 @@ const assert = require('node:assert');
 const APP_TITLE_ID = 'feb6a';
 
 /* --- TEST CONFIG START --- */
-const ID = 'dcb054b5-13a1-46e2-b86e-c1c9270a763c';
+const ID = '9ccaeec9-e616-4528-b765-85274df50769';
 const DATA_TYPE = 'blank_biz';
 const SQL = {};
 /* --- TEST CONFIG END --- */
