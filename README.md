@@ -464,7 +464,7 @@ tbd
 - certifiedcoderz@gmail.com
 
 #### The BiZ9 Framework 🦾
-![BiZ9 Framework Logo](https://github.com/biz9framework/biz9-art/blob/cacec22253a05ea8fc1b9a6c001202b918ec39d1/biz9-framework/logo/logo.png)
+![BiZ9 Framework Logo](https://github.com/biz9framework/biz9-art/blob/bbdba253e9b36e9eb88ce76d4982f09ee1379e05/biz9-framework/logo/logox400.png)
 
 **The BiZ9 Framework** is a developer friendly platform for building premium, polished, fast, professional and scalable business applications using the lastest rapid application development tools and techniques. The framework consists of libraries, commands, scripts, and packages for creating, maintaining, testing, and deploying both **mobile** and **website applications**. The primary 3rd party framework used are [React](https://react.dev/), [React Native](https://reactnative.dev/), [Node.js](http://Node.js), [ExpressJS](https://expressjs.com/), [MongoDB](https://www.mongodb.com/), [Nginx](https://nginx.org/), [Redis](https://redis.io/), [Git](https://git-scm.com/), and [Bash](https://www.gnu.org/software/bash/). [The BiZ9 Framework] focus is to be precise, routine, rapid, and customizable. The primary target devices for **The BiZ9 Framework** are [Apple iOS](https://developer.apple.com/), [Android](https://www.android.com/), [Chrome](https://www.google.com/chrome/), [Safari](https://www.apple.com/safari/), [Firefox](https://www.mozilla.org/en-US/firefox/), and [Edge](https://www.microsoft.com/en-us/edge/?form=MA13FJ). Other 3rd party Application Programming Interfaces (API) that are pre included are [Amazon Web Service](https://aws.amazon.com/), [Stripe](https://stripe.com/) and [Bravely](https://workbravely.com/).
 
