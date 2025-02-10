@@ -50,7 +50,7 @@ npm i biz9-data-server
 
     // save in root file of project. filename =  biz9_config
     let biz9_config = {
-        APP_TITLE_ID:'mongo_database_title',
+            APP_TITLE_ID:'mongo_database_title',
              MONGO_IP:"0.0.0.0",
              MONGO_USERNAME_PASSWORD:"",
              MONGO_PORT_ID:"27019",
