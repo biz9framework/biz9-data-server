@@ -35,7 +35,6 @@ npm i biz9-data-server
 ### <a id="expressjsexample"></a>Example with Express.js
 ```node
 /*
-
 * Express.JS BiZ9-Service Sample App
 
 * Required
@@ -49,7 +48,6 @@ npm i biz9-data-server
     - index.js = controller for url
 
 * $> mocha -g 'connect' test.js
-
 */
 
 // - index.js start - //
