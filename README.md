@@ -1,8 +1,8 @@
 # BiZ9-Data
 **The BiZ9-Data-Server Package** is an **object-relational mapper** (ORM) that lets you build a clean, portable, reusable, and high-level data access layer with [Node.js](http://Node.js) for data driven applications. The package consists of **create**, **read**, **update** and **destroy** (CRUD) methods to handle data access and manipulations. The framework is fast and used for rapid application development for scaling applications from 0 to millions of records seamlessly and effortless. New data is written and persisted to the [MongoDB](https://www.mongodb.com/) tables/collections. Fetching data is obtained from the server cache memory using [Redis](https://redis.io/). Using **MongoDB** with **Redis** speeds up the overall application tremendously.
-This framework is used as a [data access component] for **mobile** and **website applications**. It is best suited to be used as a package within [Express.js](http://Express.js). It can also be utilized for other **Javascript** based applications.  
+This framework is used as a [data access component] for **mobile** and **website applications**. It is best suited to be used as a package within [Express.js](http://Express.js). It can also be utilized for other **Javascript** based applications.
 
-This framework is used as a **data access component** for **mobile** and **website applications**. It is best suited to be used as a package within [Express.js](http://Express.js). It can also be utilized for other **Javascript** based applications.  
+This framework is used as a **data access component** for **mobile** and **website applications**. It is best suited to be used as a package within [Express.js](http://Express.js). It can also be utilized for other **Javascript** based applications.
 
 **The BiZ9-Data-Server** is the **ORM** solution currently promoted for use with [React](https://react.dev/), [React-Native](https://reactnative.dev/), [Angular](https://angular.dev/), and web based projects as a component of the [data access stack](https://angular.dev/).
 
@@ -34,101 +34,178 @@ npm i biz9-data-server
 
 ### <a id="expressjsexample"></a>Example with Express.js
 ```node
-    // Expressjs index.js
-    How to use:
-    $ npm install express
-    $ npm i  async
-    $ npm i  biz9-adapter
-    $ npm i  biz9-utility
+/*
 
-    let express = require('express');
-    let router = express.Router();
+* Express.JS BiZ9-Service Sample App
 
-    const async = require("async");
-    const { get_db_connect, close_db_connect, update_item, get_item, delete_item } = require("biz9-data-server");
-    const { get_new_item, get_data_config } = require("biz9-adapter");
-    const { w_error, get_id, set_form_item, error_append } = require("biz9-utility");
+* Required
+    - $ npm i mocha
+    - $ npm i express
+    - $ npm i axios
 
-    // save in root file of project. filename =  biz9_config
-    let biz9_config = {
-            APP_TITLE_ID:'mongo_database_title',
-            MONGO_IP:"0.0.0.0",
-            MONGO_USERNAME_PASSWORD:"",
-            MONGO_PORT_ID:"27019",
-            MONGO_SERVER_USER:"admin",
-            MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-            SSH_KEY:"",
-            REDIS_URL:"0.0.0.0",
-            REDIS_PORT_ID:"27019",
-            BIZ_MAP:false,
-            SERVICE_HOST_TYPE:"single"
-        };
+* Test Files
+    - app.js = app Express server configuration file.
+    - test.js = Mocha test sample.
+    - index.js = controller for url
 
-    // service_host_type options multiple for dynamic for multiple applications, single for single application. app_title_id = mongoDB database title.
-    let dynamic_title = {
-        app_title_id:'my_dynamic_app_title_id'
-    };
+* $> mocha -g 'connect' test.js
 
-    router.post("/update_form/", function(req, res) {
-        let cloud_error = null;
-        let db_connect,cloud_data = {};
-        cloud_data.item = set_form_item(mongo_collection_title,0,req.body); # params = mongo_collection, field_id, 0 is default
-        let biz9_config = get_biz9_config();
-        async.series([
-                //get mongoDB connection
-                function(call){
-                get_db_connect(get_data_config(biz9_config,dynamic_title)).then(([error,data]) => {
-                        cloud_error=error_append(cloud_error,error);
-                        db_connect = data;
-                        call();
-                        }).catch(error => {
-                            w_error("Biz9-Service-Server-Crud-Update-Form-Connect",error);
-                            call([error,null]);
-                        });
-                },
-                //update data item
-                function(call){
-                let item = {id:0,data_type:"dt_blank",first_name:"BoB", last_name:"Smith"};
-                update_item(db_connect,cloud_data.item.data_type,cloud_data.item).then(([error,data]) => {
-                        cloud_error=error_append(cloud_error,error);
-                        cloud_data.item = data;
-                        call();
-                        }).catch(error => {
-                            w_error("Biz9-Service-Server-Crud-Update-Form-Update-Item",error);
-                            call([error,null]);
-                        });
-                },
-                //get data Item
-                function(call){
-                    let data_type="dt_blank";
-                    //let id="d31facf1-769e-48a6-a7d2-6c349e4b808e"; #get exsisting data object. Guid type
-                    let id = get_new_item("dt_blank", 0); # intialize new data object.
-                        get_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
-                            cloud_error=error_append(cloud_error,error);
-                            cloud_data.item = data;
-                            call();
-                        }).catch(error => {
-                            w_error("Biz9-Service-Server-Crud-Update-Form-Get-Item",error);
-                            call([error,null]);
-                        });
+*/
 
-                },
-                //close mongoDB connection
-                function(call){
-                    close_db_connect(db_connect).then(([error,data]) => {
-                        cloud_error=error_append(cloud_error,error);
-                        call();
-                    }).catch(error => {
-                        w_error("Biz9-Service-Server-Crud-Update-Form-Connect-Close",error);
-                        call([error,null]);
-                    });
-                }
-        ],
-        function(err, result){
-            res.send({cloud_error,cloud_data});
-            res.end();
+// - index.js start - //
+let express = require('express');
+let router = express.Router();
+
+const { get_db_connect,close_db_connect,update_item,get_item,delete_item } = require("biz9-data-server");
+
+router.get('/connect', function(req, res, next) {
+let cloud_error=null;
+let db_connect,cloud_data = {};
+
+cloud_data.item = req.body;
+
+let data_config = {
+    APP_TITLE_ID:'mongo_database_app_title_id',
+    MONGO_IP:"0.0.0.0",
+    MONGO_USERNAME_PASSWORD:"",
+    MONGO_PORT_ID:"27019",
+    MONGO_SERVER_USER:"admin",
+    MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+    SSH_KEY:"",
+    REDIS_URL:"0.0.0.0",
+    REDIS_PORT_ID:"27019",
+    BIZ_MAP:false,
+    SERVICE_HOST_TYPE:"single" /*#opts single, multiple*/
+};
+let dynamic_title = {
+    app_title_id:'my_dynamic_app_title_id'
+};
+
+async.series([
+    // get_db_connect
+    function(call){
+        console.log('BiZ9-Test-Connect');
+        get_db_connect(data_config, dynamic_title).then(([error,data]) => {
+            db_connect = data;
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Connect-Error "+ error);
+            call([error,null]);
         });
+    },
+    // update_item
+    function(call){
+        console.log('BiZ9-Test-Update-Item');
+        update_item(db_connect,cloud_data.item.data_type,cloud_data.item).then(([error,data]) => {
+            cloud_data.item = data;
+            console.log(data);
+            /*
+            data = {
+                data_type: 'dt_blank',
+                id: 'f54d788f-9fcb-4def-889f-5b7562741c99',
+                title: 'title_6100',
+                first_name: 'first_name_6100',
+                last_name: 'last_name_6100',
+                user_name: 'user_name_6100',
+                test_group_id: 6100,
+                date_create: '2025-02-10T17:55:31.629Z',
+                date_save: '2025-02-10T17:55:31.632Z',
+                app_title_id: 'mongo_database_app_title_id',
+                source: 'DB'
+            }
+            */
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Update-Item-Error "+ error);
+            call([error,null]);
+        });
+    },
+    // get_item
+    function(call){
+        console.log('BiZ9-Test-Get');
+        get_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
+            cloud_data.item = data;
+            console.log(data);
+            /*
+                data = {
+                    _id: new ObjectId('67aa3e232d2366b62ef8988a'),
+                    data_type: 'dt_blank',
+                    id: '34739855-fe74-45f5-a4d1-10f73c98cb88',
+                    title: 'title_6100',
+                    first_name: 'first_name_6100',
+                    last_name: 'last_name_6100',
+                    user_name: 'user_name_6100',
+                    test_group_id: 6100,
+                    date_create: '2025-02-10T17:57:55.024Z',
+                    date_save: '2025-02-10T17:57:55.026Z',
+                    source: 'DB'
+                }
+                */
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Get-Item-Error "+ error);
+            call([error,null]);
+        });
+    },
+    // delete_item
+    function(call){
+        console.log('BiZ9-Test-Delete');
+        delete_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
+            cloud_data.item = data;
+            console.log(data);
+            /*
+            data = {
+                data_type: 'dt_blank',
+                id: 'ab70a896-5d65-422d-b12f-0c701f2cc95d',
+                cache_del: true,
+                db_del: true
+            }
+            */
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Delete-Item-Error "+ error);
+            call([error,null]);
+        });
+    },
+    // get_item_2
+    function(call){
+        console.log('BiZ9-Test-Get-2');
+        get_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
+            cloud_data.item = data;
+            console.log(data);
+            /*
+            data = {
+                data_type: 'dt_blank',
+                id: 'a99a3d27-0a87-4fb3-9d5a-7bb66748f0bb',
+                app_title_id: 'mongo_database_app_title_id',
+                source: 'NOT-FOUND'
+            }
+            */
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Get-Item-2-Error "+ error);
+            call([error,null]);
+        });
+    },
+    // close_db_connect
+    function(call){
+        console.log('BiZ9-Test-Connect');
+        close_db_connect(db_connect).then(([error,data]) => {
+            call();
+        }).catch(error => {
+            console.log("Biz9-Connect-Close-Error "+ error);
+            call([error,null]);
+        });
+    },
+],
+    function(err, result){
+        res.send({cloud_error,cloud_data});
+        res.end();
+    });
 });
+module.exports = router;
+
+// - index.js end - //
 ```
 
 ### <a id="biz9_config"></a>biz9_config
