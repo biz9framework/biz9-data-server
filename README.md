@@ -4,7 +4,7 @@ This framework is used as a [data access component] for **mobile** and **website
 
 This framework is used as a **data access component** for **mobile** and **website applications**. It is best suited to be used as a package within [**Express.js**](http://Express.js). It can also be utilized for other **Javascript** based applications.
 
-**The BiZ9-Data-Server** is the **ORM** solution currently promoted for use with [**React**](https://react.dev/), [React-Native](https://reactnative.dev/), [Angular](https://angular.dev/), and web based projects as a component of the [data access stack](https://angular.dev/).
+**The BiZ9-Data-Server** is the **ORM** solution currently promoted for use with [**React**](https://react.dev/), [**React-Native**](https://reactnative.dev/), [**Angular**](https://angular.dev/), and web based projects as a component of the [**data access stack**](https://angular.dev/).
 
 ![Mongo and Redis Chart](/img/mongo-redis.jpg)
 
