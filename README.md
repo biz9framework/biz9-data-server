@@ -68,7 +68,7 @@ router.get('/connect', function(req, res, next) {
      SSH_KEY:"",
      REDIS_URL:"0.0.0.0",
      REDIS_PORT_ID:"27019",
-     SERVICE_HOST_TYPE:"single" /*#opts single, multiple*/
+     SERVICE_HOST_TYPE:"single" /* options = single, multiple*/
  };
  let dynamic_title = {
      app_title_id:'my_dynamic_app_title_id'
@@ -260,7 +260,6 @@ module.exports = router;
 - db_connect / Open client Db connection / object
 #### Example
 ```javascript
-let cloud_error = null;
 let db_connect = {};
 let data_config = {
     APP_TITLE_ID:'mongo_database_title',
