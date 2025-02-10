@@ -15,7 +15,6 @@ router.get('/connect', function(req, res, next) {
         SSH_KEY:"",
         REDIS_URL:"0.0.0.0",
         REDIS_PORT_ID:"27019",
-        BIZ_MAP:false,
         SERVICE_HOST_TYPE:"single" /*#opts single, multiple*/
     };
     let dynamic_title = {

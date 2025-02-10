@@ -18,7 +18,6 @@ npm i biz9-data-server
 ## Required
 * [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 * [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/)
-* [biz9_config](#biz9_config)
 
 ## Contents
 * [Example with Express.js](#expressjsexample)
@@ -69,7 +68,6 @@ router.get('/connect', function(req, res, next) {
      SSH_KEY:"",
      REDIS_URL:"0.0.0.0",
      REDIS_PORT_ID:"27019",
-     BIZ_MAP:false,
      SERVICE_HOST_TYPE:"single" /*#opts single, multiple*/
  };
  let dynamic_title = {
@@ -228,31 +226,6 @@ router.get('/connect', function(req, res, next) {
 
 module.exports = router;
 // - index.js end - //
-```
-
-### <a id="biz9_config"></a>biz9_config
-The BiZ9 Config file which contains application configuration information.
-#### Params
-- none
-#### Example
-```bash
-VERSION='1.0.0'
-TITLE='Project-Title';
-APP_TITLE_ID='mongo_database_title';
-PROJECT_ID='19';
-PORT_ID="1901";
-REPO="git@github.com:biz9framework/biz9-service-server.git";
-BRANCH="main";
-MONGO_IP="0.0.0.0";
-MONGO_USERNAME_PASSWORD="";
-MONGO_PORT_ID="27019";
-MONGO_SERVER_USER="admin";
-MONGO_CONFIG_FILE_PATH='/etc/mongod.conf';
-SSH_KEY="";
-REDIS_URL="0.0.0.0";
-REDIS_PORT_ID="27019";
-BIZ_MAP=false;
-SERVICE_HOST_TYPE="single";
 ```
 
 * [get_db_connect](#get_db_connect)
