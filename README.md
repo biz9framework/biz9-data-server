@@ -33,7 +33,7 @@ npm i biz9-data-server
 * [Credit](#credit)
 
 ### <a id="expressjsexample"></a>Example with Express.js
-    ```node
+```node
     // Expressjs index.js
     How to use:
     $ npm install express
@@ -43,6 +43,7 @@ npm i biz9-data-server
 
     let express = require('express');
     let router = express.Router();
+
     const async = require("async");
     const { get_db_connect, close_db_connect, update_item, get_item, delete_item } = require("biz9-data-server");
     const { get_new_item, get_data_config } = require("biz9-adapter");
@@ -51,10 +52,10 @@ npm i biz9-data-server
     // save in root file of project. filename =  biz9_config
     let biz9_config = {
             APP_TITLE_ID:'mongo_database_title',
-             MONGO_IP:"0.0.0.0",
-             MONGO_USERNAME_PASSWORD:"",
-             MONGO_PORT_ID:"27019",
-             MONGO_SERVER_USER:"admin",
+            MONGO_IP:"0.0.0.0",
+            MONGO_USERNAME_PASSWORD:"",
+            MONGO_PORT_ID:"27019",
+            MONGO_SERVER_USER:"admin",
              MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
              SSH_KEY:"",
              REDIS_URL:"0.0.0.0",
@@ -153,7 +154,6 @@ REDIS_URL="0.0.0.0";
 REDIS_PORT_ID="27019";
 BIZ_MAP=false;
 SERVICE_HOST_TYPE="single";
-~
 ```
 
 * [get_db_connect](#get_db_connect)
@@ -163,16 +163,16 @@ SERVICE_HOST_TYPE="single";
     - biz9_config_file. Data config properties. Save this file in project root directory. Use get_data_config(data_config_file, default_app_title_id) to parse.
     biz9_config_file = {
 APP_TITLE_ID:'mongo_database_title',
-             MONGO_IP:"0.0.0.0",
-             MONGO_USERNAME_PASSWORD:"",
-             MONGO_PORT_ID:"27019",
-             MONGO_SERVER_USER:"admin",
-             MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-             SSH_KEY:"",
-             REDIS_URL:"0.0.0.0",
-             REDIS_PORT_ID:"27019",
-             BIZ_MAP:false,
-             SERVICE_HOST_TYPE:"single"
+    MONGO_IP:"0.0.0.0",
+    MONGO_USERNAME_PASSWORD:"",
+    MONGO_PORT_ID:"27019",
+    MONGO_SERVER_USER:"admin",
+    MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+    SSH_KEY:"",
+    REDIS_URL:"0.0.0.0",
+    REDIS_PORT_ID:"27019",
+    BIZ_MAP:false,
+    SERVICE_HOST_TYPE:"single"
 };
 - dynamic_app_title_id. If SERVICE_HOST_TYPE property equal 'multiple' make database table unique via app_title_id value.
 dynamic_title = {
