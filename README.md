@@ -233,7 +233,7 @@ module.exports = router;
 ### <a id="get_db_connect"></a>Get DB
     Intialize new open Db connection.
 #### Params
-- Data config / Object with DB configuration properties.
+- Data config / DB configuration settings. / object
     ```javascript
     let data_config = {
         APP_TITLE_ID:'mongo_database_title',
