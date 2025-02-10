@@ -14,16 +14,16 @@ npm i biz9-data-server
 * [biz9_config](#biz9_config)
 
 ## Contents
-    * [Example with Express.js](#expressjsexample)
-    * [get_db_connect](#get_db_connect)
-    * [close_db_connect](#close_db_connect)
-    * [update_item](#update_item)
-    * [get_item](#get_item)
-    * [delete_item](#delete_item)
-    * [get_item_list](#get_item_list)
-    * [update_item_list](#update_item_list)
-    * [delete_item_list](#delete_item_list)
-    * [Credit](#credit)
+* [Example with Express.js](#expressjsexample)
+* [get_db_connect](#get_db_connect)
+* [close_db_connect](#close_db_connect)
+* [update_item](#update_item)
+* [get_item](#get_item)
+* [delete_item](#delete_item)
+* [get_item_list](#get_item_list)
+* [update_item_list](#update_item_list)
+* [delete_item_list](#delete_item_list)
+* [Credit](#credit)
 
 ### <a id="expressjsexample"></a>Example with Express.js
     ```node
