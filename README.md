@@ -231,7 +231,7 @@ module.exports = router;
 
 * [get_db_connect](#get_db_connect)
 ### <a id="get_db_connect"></a>Get DB
-    Intialize new open Db connection.
+    Intialize and open Db connection.
 #### Params
 - Data config / DB configuration settings / object
     ```javascript
@@ -286,7 +286,7 @@ get_db_connect(data_config, dynamic_app_title_id).then(([error,data]) => {
 ```
 
 ### <a id="close_db_connect"></a>close_db_connect
-Close and dispose Mongo database connection.
+Close Db connection.
 #### Params
 - db_connect / Open client Db connection / object
 #### Returns
@@ -301,7 +301,7 @@ close_db_connect(db_connect).then(([error,data]) => {
 ```
 
 ### <a id="get_item"></a>get_item
-Get record from table in database by primary key field.
+Get a data item.
 #### Params
 - db_connect / Open client Db connection / object
 - data_type / collection title / string
@@ -333,7 +333,7 @@ get_item(db_connect,data_type,id).then(([error,data]) => {
 ```
 
 ### <a id="update_item"></a>update_item
-Create and or update record in table database.
+Create and or update data item.
 #### Params
 - db_connect / Open client Db connection / object
 - id / Primary key / GUID
@@ -376,7 +376,7 @@ update_item(db_connect,data_type,id,item).then(([error,data]) => {
 ```
 
 ### <a id="delete_item"></a>delete_item
-Delete data item from Db based on filter.
+Delete data item.
 #### Params
 - db_connect / Open client Db connection / object
 - data_type / Collection title / string
@@ -402,7 +402,7 @@ delete_item(db_connect,data_type,id).then(([error,data]) => {
 ```
 
 ### <a id="delete_item_list"></a>delete_item_list
-Delete data items in Db collection based on filter.
+Delete data items.
 #### Params
 - db_connect / Open client Db connection / object
 - filter_object / Filter  / object
