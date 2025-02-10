@@ -278,7 +278,7 @@ get_db_connect(get_data_config(biz9_config_file,dynamic_app_title_id)).then(([er
     cloud_error=error_append(cloud_error,error);
     db_connect = data;
     }).catch(error => {
-        w_error("Biz9-Service-Server-Crud-Update-Connect",error);
+        console.log(error);
     });
 });
 
@@ -287,7 +287,7 @@ get_db_connect(data_config, {}).then(([error,data]) => {
     cloud_error=error_append(cloud_error,error);
     db_connect = data;
     }).catch(error => {
-        w_error("Biz9-Service-Server-Crud-Update-Connect",error);
+        console.log(error);
     });
 });
 
@@ -304,7 +304,7 @@ Close and dispose Mongo database connection.
 close_db_connect(db_connect).then(([error,data]) => {
     cloud_error=error_append(cloud_error,error);
     }).catch(error => {
-        w_error("Biz9-Service-Server-Crud-Update-Connect-Close",error);
+        console.log(error);
     });
 });
 ```
@@ -325,7 +325,7 @@ update_item(db_connect,cloud_data.item.data_type,cloud_data.item).then(([error,d
     cloud_error = error_append(cloud_error,error);
     cloud_data.item = data;
 }).catch(error => {
-    w_error("Biz9-Service-Server-Crud-Update-Update-Item",error);
+    console.log(error);
 });
 ```
 
@@ -357,7 +357,7 @@ get_item(db_connect,data_type,id).then(([error,data]) => {
         source: 'DB'
     };
 }).catch(error => {
-    w_error("Biz9-Service-Server-Crud-Update-Get-Item",error);
+    console.log(error);
 });
 ```
 
@@ -390,7 +390,7 @@ update_item(db_connect,data_type,id).then(([error,data]) => {
             source: 'DB'
         }
 }).catch(error => {
-    w_error("Biz9-Service-Server-Crud-Update-Item",error);
+    console.log(error);
 });
 ```
 
@@ -418,7 +418,7 @@ cache_del: true,
 db_del: true
 };
 }).catch(error => {
-    w_error("Biz9-Service-Server-Crud-Delete-Item",error);
+    console.log(error);
     });
 });
 ```
@@ -437,7 +437,7 @@ let sql = {data_type:"blank_biz"}; #filter field and value
 delete_item_list(db_connect,data_type,sql).then(([error,data]) => {
     data = [];
 }).catch(error => {
-    w_error("Biz9-Service-Server-Crud-Delete-Item-List",error);
+    console.log(error);
 });
 ```
 
