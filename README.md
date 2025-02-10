@@ -231,9 +231,9 @@ module.exports = router;
 
 * [get_db_connect](#get_db_connect)
 ### <a id="get_db_connect"></a>Get DB
-    tbd
+    Intialize new open Db connection.
 #### Params
-- Data config object with DB configuration properties.
+- Data config / Object with DB configuration properties.
     ```javascript
     let data_config = {
         APP_TITLE_ID:'mongo_database_title',
@@ -245,10 +245,10 @@ module.exports = router;
         SSH_KEY:"",
         REDIS_URL:"0.0.0.0",
         REDIS_PORT_ID:"27019",
-        SERVICE_HOST_TYPE:"single" /* opts: single, multiple */
+        SERVICE_HOST_TYPE:"single" /* options: single, multiple */
     };
     ```
-- dynamic_app_title_id. If SERVICE_HOST_TYPE  equal 'multiple' database titles unique via app_title_id value.
+- dynamic_app_title_id / Dynamic app title id based on SERVICE_HOST_TYPE.  options: single, multiple. / object
     ```javascript
     let dynamic_title = {
         app_title_id:'my_dynamic_app_title_id'
@@ -272,7 +272,7 @@ let data_config = {
     SSH_KEY:"",
     REDIS_URL:"0.0.0.0",
     REDIS_PORT_ID:"27019",
-    SERVICE_HOST_TYPE:"single" /* opts: single, multiple */
+    SERVICE_HOST_TYPE:"single" /* options: single, multiple */
 };
 let dynamic_app_title_id = {
 app_title_id:'my_dynamic_app_title_id'
