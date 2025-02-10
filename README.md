@@ -56,12 +56,12 @@ npm i biz9-data-server
             MONGO_USERNAME_PASSWORD:"",
             MONGO_PORT_ID:"27019",
             MONGO_SERVER_USER:"admin",
-             MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-             SSH_KEY:"",
-             REDIS_URL:"0.0.0.0",
-             REDIS_PORT_ID:"27019",
-             BIZ_MAP:false,
-             SERVICE_HOST_TYPE:"single"
+            MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+            SSH_KEY:"",
+            REDIS_URL:"0.0.0.0",
+            REDIS_PORT_ID:"27019",
+            BIZ_MAP:false,
+            SERVICE_HOST_TYPE:"single"
         };
 
     // service_host_type options multiple for dynamic for multiple applications, single for single application. app_title_id = mongoDB database title.
