@@ -35,6 +35,7 @@ router.get('/connect', function(req, res, next) {
         // get_db_connect
         function(call){
             console.log('BiZ9-Test-Connect');
+
             get_db_connect(data_config, dynamic_title).then(([error,data]) => {
                 db_connect = data;
                 call();
@@ -46,8 +47,10 @@ router.get('/connect', function(req, res, next) {
         // update_item
         function(call){
             console.log('BiZ9-Test-Update-Item');
+
             let data_type = 'dt_blank';
             let id = 0;
+
             update_item(db_connect,data_type,item).then(([error,data]) => {
                 item = data;
                 console.log(data);
@@ -75,8 +78,10 @@ router.get('/connect', function(req, res, next) {
         // get_item
         function(call){
             console.log('BiZ9-Test-Get');
+
             let data_type = item.data_type;
             let id = item.id;
+
             get_item(db_connect,data_type,id).then(([error,data]) => {
                 item = data;
                 console.log(data);
@@ -104,8 +109,10 @@ router.get('/connect', function(req, res, next) {
         // delete_item
         function(call){
             console.log('BiZ9-Test-Delete');
+
             let data_type = item.data_type;
             let id = item.id;
+
             delete_item(db_connect,data_type,id).then(([error,data]) => {
                 item = data;
                 console.log(data);
@@ -126,8 +133,10 @@ router.get('/connect', function(req, res, next) {
         // get_item_2
         function(call){
             console.log('BiZ9-Test-Get-2');
+
             let data_type = item.data_type;
             let id = item.id;
+
             get_item(db_connect,data_type,id).then(([error,data]) => {
                 item = data;
                 console.log(data);
@@ -148,6 +157,7 @@ router.get('/connect', function(req, res, next) {
         // close_db_connect
         function(call){
             console.log('BiZ9-Test-Connect');
+
             close_db_connect(db_connect).then(([error,data]) => {
                 call();
             }).catch(error => {
@@ -162,3 +172,4 @@ router.get('/connect', function(req, res, next) {
         });
 });
 module.exports = router;
+
