@@ -421,17 +421,6 @@ delete_item_list(db_connect,data_type,sql).then(([error,data]) => {
 });
 ```
 
-### <a id="9_blank"></a>9_blank
-tbd
-#### Params
-- none
-#### Returns
-- null
-#### Example
-```bash
--- n/a --
-```
-
 #### <a id="credit"></a>Credits
 
 #### Company
@@ -455,7 +444,7 @@ tbd
 #### TaNK9 Code 👽
 **Brandon Poole Sr** also known as **‘TaNK’** is a technical lead and full stack software engineer with over 19 years of professional experience. He was born and raised in **Atlanta, Ga** and graduated with a [**Computer Information Systems Bachelor of Science Degree**] from [**Fort Valley State University**](https://www.fvsu.edu/). He is proficient in [**ASP.NET C#**](http://ASP.NET), [**ASP.NET MVC**](https://dotnet.microsoft.com/en-us/apps/aspnet/mvc), [**.NET Core**](https://dotnet.microsoft.com/en-us/download), [**Microsoft SQL Server**](https://www.microsoft.com/en-us/sql-server), [**IIS Web Server**](https://learn.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-web-server-overview), [**Node.js**](http://Node.js), [**React**](https://react.dev/), [**React Native**](https://reactnative.dev/), [**Framework7**](https://framework7.io/), [**Redis**](https://redis.io/), [**Amazon Web Services**](https://aws.amazon.com/), [**Apple iOS**](https://developer.apple.com/ios/), [**Android SDK**](https://developer.android.com/studio), [**MongoDB**](https://www.mongodb.com/), [**Redis**](https://redis.io/), [**NGINX**](https://nginx.org/), and [**Git**](https://git-scm.com/). He has worked as a software developer for Fortune 500 companies such as [**The Boeing Company**](https://www.boeing.com/), [**Georgia Pacific**](https://www.gp.com/), [**Colonial Pipeline**](https://www.colpipe.com/), [**Home Depot**] and [**United Parcel Services**].
 
-He is sometimes referred to as “the real Tank” from the movie [The Matrix](https://www.imdb.com/title/tt0133093/).
+He is sometimes referred to as “the real Tank” from the movie [**The Matrix**](https://www.imdb.com/title/tt0133093/).
 
 - [Tank9Code Blog](https://medium.com/@tank9code/about-brandon-poole-sr-ac2fe8e06a09)
 - [Tank9Code Twitter](https://instagram.com/tank9code)
