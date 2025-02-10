@@ -21,7 +21,7 @@ npm i biz9-data-server
     * [get_item_list](#get_item_list)
     * [update_item_list](#update_item_list)
     * [delete_item_list](#delete_item_list)
-* [Credit](#credit)
+    * [Credit](#credit)
 
 ### <a id="expressjsexample"></a>Example with Express.js
     ```node
