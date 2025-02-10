@@ -4,9 +4,7 @@ let router = express.Router();
 const { get_db_connect,close_db_connect,update_item,get_item,delete_item } = require("biz9-data-server");
 
 router.get('/connect', function(req, res, next) {
-    let cloud_error=null;
-    let db_connect,cloud_data = {};
-    cloud_data.item = req.body;
+    let db_connect = {};
     let data_config = {
         APP_TITLE_ID:'mongo_database_app_title_id',
         MONGO_IP:"0.0.0.0",
@@ -23,6 +21,16 @@ router.get('/connect', function(req, res, next) {
     let dynamic_title = {
         app_title_id:'my_dynamic_app_title_id'
     };
+    let item =
+        {
+            data_type: 'dt_blank',
+            id: 0,
+            title: 'title_6100',
+            first_name: 'first_name_6100',
+            last_name: 'last_name_6100',
+            user_name: 'user_name_6100',
+            test_group_id: 6100
+        };
     async.series([
         // get_db_connect
         function(call){
@@ -38,8 +46,10 @@ router.get('/connect', function(req, res, next) {
         // update_item
         function(call){
             console.log('BiZ9-Test-Update-Item');
-            update_item(db_connect,cloud_data.item.data_type,cloud_data.item).then(([error,data]) => {
-                cloud_data.item = data;
+            let data_type = 'dt_blank';
+            let id = 0;
+            update_item(db_connect,data_type,item).then(([error,data]) => {
+                item = data;
                 console.log(data);
                 /*
                 data = {
@@ -65,8 +75,10 @@ router.get('/connect', function(req, res, next) {
         // get_item
         function(call){
             console.log('BiZ9-Test-Get');
-            get_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
-                cloud_data.item = data;
+            let data_type = item.data_type;
+            let id = item.id;
+            get_item(db_connect,data_type,id).then(([error,data]) => {
+                item = data;
                 console.log(data);
                 /*
                     data = {
@@ -92,8 +104,10 @@ router.get('/connect', function(req, res, next) {
         // delete_item
         function(call){
             console.log('BiZ9-Test-Delete');
-            delete_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
-                cloud_data.item = data;
+            let data_type = item.data_type;
+            let id = item.id;
+            delete_item(db_connect,data_type,id).then(([error,data]) => {
+                item = data;
                 console.log(data);
                 /*
                 data = {
@@ -112,8 +126,10 @@ router.get('/connect', function(req, res, next) {
         // get_item_2
         function(call){
             console.log('BiZ9-Test-Get-2');
-            get_item(db_connect,cloud_data.item.data_type,cloud_data.item.id).then(([error,data]) => {
-                cloud_data.item = data;
+            let data_type = item.data_type;
+            let id = item.id;
+            get_item(db_connect,data_type,id).then(([error,data]) => {
+                item = data;
                 console.log(data);
                 /*
                 data = {
@@ -141,7 +157,7 @@ router.get('/connect', function(req, res, next) {
         },
     ],
         function(err, result){
-            res.send({cloud_error,cloud_data});
+            res.send({item:item});
             res.end();
         });
 });
