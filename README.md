@@ -1,11 +1,13 @@
 # BiZ9-Data
 **BiZ9-Data** is a object-relational mapper **(ORM)** that lets you build a clean, portable, and high-level data access layer with Node.js for data driven applications. It is the engine compartment to the [**BiZ9 Framework**](https://github.com/biz9framework). The primary libriaries are [**MongoDB**](https://www.mongodb.com/) which is a cross-platform, document-oriented database and [**Redis**](https://redis.io/), an in-memory storage, used as a distributed, in memory key-value database. **BiZ9-Data** is the **ORM** solution currently promoted for use with [**React**](https://react.dev/), [**React-Native**](https://reactnative.dev/), [**Angular**](https://angular.dev/), and [**Express.js**](http://Express.js) based projects as part of the data access stack.
+
 ## Installation
 Use the [npm](https://npm.com) installer to install.
 
 ```bash
 npm i biz9-data-server
 ```
+
 ## Required
 * [MongoDB](https://www.mongodb.com/docs/manual/installation/)
 * [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/)
