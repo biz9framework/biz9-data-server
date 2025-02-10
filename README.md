@@ -233,25 +233,31 @@ module.exports = router;
 ### <a id="get_db_connect"></a>Get DB
     tbd
 #### Params
-- data config configuration.
-    data_config = {
-    APP_TITLE_ID:'mongo_database_title',
-    MONGO_IP:"0.0.0.0",
-    MONGO_USERNAME_PASSWORD:"",
-    MONGO_PORT_ID:"27019",
-    MONGO_SERVER_USER:"admin",
-    MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-    SSH_KEY:"",
-    REDIS_URL:"0.0.0.0",
-    REDIS_PORT_ID:"27019",
-    SERVICE_HOST_TYPE:"single"
-};
-- dynamic_app_title_id. If SERVICE_HOST_TYPE property equal 'multiple' make database table unique via app_title_id value.
-dynamic_title = {
-app_title_id:'my_dynamic_app_title_id'
-}
+- Data config object with DB configuration properties.
+    ```javascript
+    let data_config = {
+        APP_TITLE_ID:'mongo_database_title',
+        MONGO_IP:"0.0.0.0",
+        MONGO_USERNAME_PASSWORD:"",
+        MONGO_PORT_ID:"27019",
+        MONGO_SERVER_USER:"admin",
+        MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+        SSH_KEY:"",
+        REDIS_URL:"0.0.0.0",
+        REDIS_PORT_ID:"27019",
+        SERVICE_HOST_TYPE:"single" /* opts: single, multiple */
+    };
+    ```
+- dynamic_app_title_id. If SERVICE_HOST_TYPE  equal 'multiple' database titles unique via app_title_id value.
+    ```javascript
+    let dynamic_title = {
+        app_title_id:'my_dynamic_app_title_id'
+    };
+    ````
+
 #### Returns
-- db_connect / open client database connection / database object
+- error / Error message / string
+- db_connect / Open client Db connection / object
 #### Example
 ```javascript
 let cloud_error = null;
@@ -274,9 +280,8 @@ app_title_id:'my_dynamic_app_title_id'
 
 get_db_connect(data_config, dynamic_app_title_id).then(([error,data]) => {
     db_connect = data;
-    }).catch(error => {
-        console.log(error);
-    });
+}).catch(error => {
+    console.log(error);
 });
 
 ```
@@ -284,33 +289,13 @@ get_db_connect(data_config, dynamic_app_title_id).then(([error,data]) => {
 ### <a id="close_db_connect"></a>close_db_connect
 Close and dispose Mongo database connection.
 #### Params
-- db_connect ( required ) / open client database connection / database object
+- db_connect / Open client Db connection / object
 #### Returns
-- db_connect / Closed client database connection / database object
+- error / Error message / string
+- db_connect / Closed client Db connection / object
 #### Example
 ```javascript
 close_db_connect(db_connect).then(([error,data]) => {
-    cloud_error=error_append(cloud_error,error);
-    }).catch(error => {
-        console.log(error);
-    });
-});
-```
-
-### <a id="update_item"></a>update_item
-Create and or update record in table database.
-#### Params
-- db_connect ( required ) / open client database connection / database object
-- id ( required ) / primary key / GUID, 0 for new item
-- data_type ( required ) / table name / string, ex = 'dt_blank'
-- data_item ( required ) / data item object to be saved / object
-#### Example
-```javascript
-let cloud_error = null;
-let db_connect = {};
-let item = {id:0, data_type:"dt_blank", first_name:"BoB", last_name:"Smith"};
-update_item(db_connect,item.data_type,item).then(([error,data]) => {
-    item = data;
 }).catch(error => {
     console.log(error);
 });
@@ -319,16 +304,16 @@ update_item(db_connect,item.data_type,item).then(([error,data]) => {
 ### <a id="get_item"></a>get_item
 Get record from table in database by primary key field.
 #### Params
-- db_connect ( required ) / open client database connection / database object
-- data_type ( required ) / table name / string
-- id ( optional, recommended ) / primary key of record in table from database / Guid
-- title_url ( optional ) / Title url of the title of the data item / string
+- db_connect / Open client Db connection / object
+- data_type / collection title / string
+- id / ( optional ) / Primary key / GUID
+#### Returns
+- error / Error message / string
+- item / Data item / object
 #### Example
 ```javascript
-let db_connect = {};
 let data_type="dt_blank";
-let id="d31facf1-769e-48a6-a7d2-6c349e4b808e"; #get exsisting data object. Guid
-let item = get_new_item("dt_blank", id); # intialize new object item
+let id="d31facf1-769e-48a6-a7d2-6c349e4b808e"; 
 get_item(db_connect,data_type,id).then(([error,data]) => {
     data = {
         data_type: 'dt_blank',
@@ -341,7 +326,7 @@ get_item(db_connect,data_type,id).then(([error,data]) => {
         date_create: '2025-02-10T02:16:46.137Z',
         date_save: '2025-02-10T02:16:46.138Z',
         app_title_id: 'mongo_database_title',
-        source: 'DB'
+        source: 'CACHE'
     };
 }).catch(error => {
     console.log(error);
@@ -351,18 +336,28 @@ get_item(db_connect,data_type,id).then(([error,data]) => {
 ### <a id="update_item"></a>update_item
 Create and or update record in table database.
 #### Params
-- db_connect ( required ) / open client database connection / database object
-- id ( required ) / primary key / GUID
-- data_type ( required ) / table name / string
-- item ( required ) / data item object to be saved / object
+- db_connect / Open client Db connection / object
+- id / Primary key / GUID
+- data_type / collection title / string
+- item / data item  / object
 #### Returns
-- item / Data item of updated record. On create record, id field unique GUID is generated / object
+- error / Error message / string
+- item / Data item / object
 #### Example
 ```javascript
 let data_type="dt_blank";
-//let id="9f1aeca3-b466-4cae-af4e-35b3fe9f31a1"; #get exsisting data object. Guid
-let item = get_new_item("dt_blank", id); # intialize new object item
-update_item(db_connect,data_type,id).then(([error,data]) => {
+let id = 0; // Intialize new data item, id = 0
+//let id="9f1aeca3-b466-4cae-af4e-35b3fe9f31a1";  // Get exsisting data item. Guid
+let item = {
+    id: id,
+    data_type:data_type,
+    title: 'title_438',
+    first_name: 'first_name_438',
+    last_name: 'last_name_438',
+    user_name: 'user_name_438',
+    test_group_id: 438
+}; 
+update_item(db_connect,data_type,id,item).then(([error,data]) => {
         data = {
             data_type: 'dt_blank',
             id: '9f1aeca3-b466-4cae-af4e-35b3fe9f31a1',
@@ -382,25 +377,23 @@ update_item(db_connect,data_type,id).then(([error,data]) => {
 ```
 
 ### <a id="delete_item"></a>delete_item
-Delete data item from table in database by filter.
+Delete data item from Db based on filter.
 #### Params
--- db_connect ( required ) / open client database connection / database object
-- data_type ( required ) / table name / string
-- id ( required ) / primary key / GUID
-- item ( required ) / data item object to be saved / object
+- db_connect / Open client Db connection / object
+- data_type / Collection title / string
+- id / Primary key / GUID
 #### Returns
-- item / Empty record from table in database. / object
+- error / Error message / string
+- data / Empty data item. / object
 #### Example
 ```bash
-let db_connect = {};
 let data_type="dt_blank";
-let id="d31facf1-769e-48a6-a7d2-6c349e4b808e"; #get exsisting data object. Guid
-let item = get_new_item("dt_blank", id); # intialize new object item
+let id="d31facf1-769e-48a6-a7d2-6c349e4b808e";
 delete_item(db_connect,data_type,id).then(([error,data]) => {
         data =
         {
-            data_type: 'blank_biz',
-            id: '9f1aeca3-b466-4cae-af4e-35b3fe9f31a1',
+            data_type: 'dt_blank',
+            id: 'd31facf1-769e-48a6-a7d2-6c349e4b808e',
             cache_del: true,
             db_del: true
         };
@@ -410,16 +403,18 @@ delete_item(db_connect,data_type,id).then(([error,data]) => {
 ```
 
 ### <a id="delete_item_list"></a>delete_item_list
-Delete records in table by filter.
+Delete data items in Db collection based on filter.
 #### Params
-- filter_object ( required ) / filter by properties object / object
-- data_type ( required ) / table name / string
+- db_connect / Open client Db connection / object
+- filter_object / Filter  / object
+- data_type / Collection title / string
 #### Returns
-- data / empty data list / list
+- error / Error message / string
+- data / Empty data list / list
 #### Example
 ```javascript
 let data_type = "dt_blank";
-let sql = {data_type:"blank_biz"}; #filter field and value
+let sql = {data_type:data_type}; //filter field and value
 delete_item_list(db_connect,data_type,sql).then(([error,data]) => {
     data = [];
 }).catch(error => {
