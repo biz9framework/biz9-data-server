@@ -233,7 +233,7 @@ module.exports = router;
 ### <a id="get_db_connect"></a>Get DB
     Intialize new open Db connection.
 #### Params
-- Data config / DB configuration settings. / object
+- Data config / DB configuration settings / object
     ```javascript
     let data_config = {
         APP_TITLE_ID:'mongo_database_title',
@@ -248,7 +248,7 @@ module.exports = router;
         SERVICE_HOST_TYPE:"single" /* options: single, multiple */
     };
     ```
-- dynamic_app_title_id / Dynamic app title id based on SERVICE_HOST_TYPE.  options: single, multiple. / object
+- dynamic_app_title_id / Dynamic app title id based on SERVICE_HOST_TYPE / options: single, multiple. / object
     ```javascript
     let dynamic_title = {
         app_title_id:'my_dynamic_app_title_id'
