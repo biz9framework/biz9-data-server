@@ -226,15 +226,16 @@ router.get('/connect', function(req, res, next) {
 
 module.exports = router;
 // - index.js end - //
+
 ```
 
 * [get_db_connect](#get_db_connect)
 ### <a id="get_db_connect"></a>Get DB
     tbd
 #### Params
-    - biz9_config_file. Data config properties. Save this file in project root directory. Use get_data_config(data_config_file, default_app_title_id) to parse.
-    biz9_config_file = {
-APP_TITLE_ID:'mongo_database_title',
+- data config configuration.
+    data_config = {
+    APP_TITLE_ID:'mongo_database_title',
     MONGO_IP:"0.0.0.0",
     MONGO_USERNAME_PASSWORD:"",
     MONGO_PORT_ID:"27019",
@@ -243,7 +244,6 @@ APP_TITLE_ID:'mongo_database_title',
     SSH_KEY:"",
     REDIS_URL:"0.0.0.0",
     REDIS_PORT_ID:"27019",
-    BIZ_MAP:false,
     SERVICE_HOST_TYPE:"single"
 };
 - dynamic_app_title_id. If SERVICE_HOST_TYPE property equal 'multiple' make database table unique via app_title_id value.
@@ -255,36 +255,24 @@ app_title_id:'my_dynamic_app_title_id'
 #### Example
 ```javascript
 let cloud_error = null;
-let db_connect,cloud_data = {};
+let db_connect = {};
 let data_config = {
-APP_TITLE_ID:'mongo_database_title',
-             MONGO_IP:"0.0.0.0",
-             MONGO_USERNAME_PASSWORD:"",
-             MONGO_PORT_ID:"27019",
-             MONGO_SERVER_USER:"admin",
-             MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
-             SSH_KEY:"",
-             REDIS_URL:"0.0.0.0",
-             REDIS_PORT_ID:"27019",
-             BIZ_MAP:false,
-             SERVICE_HOST_TYPE:"single"
+    APP_TITLE_ID:'mongo_database_title',
+    MONGO_IP:"0.0.0.0",
+    MONGO_USERNAME_PASSWORD:"",
+    MONGO_PORT_ID:"27019",
+    MONGO_SERVER_USER:"admin",
+    MONGO_CONFIG_FILE_PATH:'/etc/mongod.conf',
+    SSH_KEY:"",
+    REDIS_URL:"0.0.0.0",
+    REDIS_PORT_ID:"27019",
+    SERVICE_HOST_TYPE:"single" /* opts: single, multiple */
 };
 let dynamic_app_title_id = {
 app_title_id:'my_dynamic_app_title_id'
 };
 
-//option 1
-get_db_connect(get_data_config(biz9_config_file,dynamic_app_title_id)).then(([error,data]) => {
-    cloud_error=error_append(cloud_error,error);
-    db_connect = data;
-    }).catch(error => {
-        console.log(error);
-    });
-});
-
-//option 2
-get_db_connect(data_config, {}).then(([error,data]) => {
-    cloud_error=error_append(cloud_error,error);
+get_db_connect(data_config, dynamic_app_title_id).then(([error,data]) => {
     db_connect = data;
     }).catch(error => {
         console.log(error);
@@ -319,11 +307,10 @@ Create and or update record in table database.
 #### Example
 ```javascript
 let cloud_error = null;
-let db_connect,cloud_data = {};
-var cloud_data.item = {id:0, data_type:"dt_blank", first_name:"BoB", last_name:"Smith"};
-update_item(db_connect,cloud_data.item.data_type,cloud_data.item).then(([error,data]) => {
-    cloud_error = error_append(cloud_error,error);
-    cloud_data.item = data;
+let db_connect = {};
+let item = {id:0, data_type:"dt_blank", first_name:"BoB", last_name:"Smith"};
+update_item(db_connect,item.data_type,item).then(([error,data]) => {
+    item = data;
 }).catch(error => {
     console.log(error);
 });
@@ -412,14 +399,13 @@ let item = get_new_item("dt_blank", id); # intialize new object item
 delete_item(db_connect,data_type,id).then(([error,data]) => {
         data =
         {
-data_type: 'blank_biz',
-id: '9f1aeca3-b466-4cae-af4e-35b3fe9f31a1',
-cache_del: true,
-db_del: true
-};
+            data_type: 'blank_biz',
+            id: '9f1aeca3-b466-4cae-af4e-35b3fe9f31a1',
+            cache_del: true,
+            db_del: true
+        };
 }).catch(error => {
     console.log(error);
-    });
 });
 ```
 
