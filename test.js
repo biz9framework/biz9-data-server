@@ -1,12 +1,13 @@
-const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item_list,get_item,delete_item,get_item_list,delete_item_list,count_item_list } = require("./");
-//const { get_id } = require("biz9-utility-server");
-const {get_guid,get_id} = require("biz9-utility-server");
+const async = require('async');
 const assert = require('node:assert');
-const APP_TITLE_ID = 'feb9';
+const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item_list,get_item,delete_item,get_item_list,delete_item_list,count_item_list } = require("./");
+const {get_guid,get_id} = require("biz9-utility");
 
 /* --- TEST CONFIG START --- */
-const ID = '9f1aeca3-b466-4cae-af4e-35b3fe9f31a1';
+//const ID = '0'; // 0 = intialize a new data item.
+const ID = '79384537-6ff2-4969-b913-4404951aff98';
 const DATA_TYPE = 'blank_biz';
+const APP_TITLE_ID = 'db_title_feb10';
 const SQL = {};
 /* --- TEST CONFIG END --- */
 
@@ -343,8 +344,6 @@ describe('test_item_get', function(){ this.timeout(25000);
             },
             function(call){
                 console.log('--TEST-GET-ITEM-2-START--');
-                console.log(DATA_TYPE);
-                console.log(item_test.id);
                 get_item(db_connect,DATA_TYPE,item_test.id).then(([error,data])=> {
                     if(error){
                         throw '--TEST-GET-ITEM-2-ERROR--'+ error;
@@ -353,6 +352,7 @@ describe('test_item_get', function(){ this.timeout(25000);
                     item_test = data;
                     assert.notEqual(0,data.id);
                     assert.equal(DATA_TYPE,data.data_type);
+                    assert.equal(ID,data.id);
                     console.log('--TEST-GET-ITEM-2-SUCCESS--');
                     call();
                 }).catch(error => handleError(error))
