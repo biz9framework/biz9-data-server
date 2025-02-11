@@ -6,7 +6,7 @@ This framework is used as a **data access component** for **mobile** and **websi
 
 **The BiZ9-Data-Server** is the **ORM** solution currently promoted for use with [**React**](https://react.dev/), [**React-Native**](https://reactnative.dev/), [**Angular**](https://angular.dev/), and web based projects as a component of the [**data access stack**](https://angular.dev/).
 
-![Mongo and Redis Chart](/img/mongo-redis.jpg)
+![Mongo and Redis Chart](https://github.com/biz9framework/biz9-data-server/blob/main/img/mongo-redis.jpg?raw=true)
 
 ## Installation
 Use the [npm](https://npm.com) installer to install.
@@ -312,7 +312,7 @@ Get a data item.
 #### Example
 ```javascript
 let data_type="dt_blank";
-let id="d31facf1-769e-48a6-a7d2-6c349e4b808e"; 
+let id="d31facf1-769e-48a6-a7d2-6c349e4b808e";
 get_item(db_connect,data_type,id).then(([error,data]) => {
     data = {
         data_type: 'dt_blank',
@@ -355,7 +355,7 @@ let item = {
     last_name: 'last_name_438',
     user_name: 'user_name_438',
     test_group_id: 438
-}; 
+};
 update_item(db_connect,data_type,id,item).then(([error,data]) => {
         data = {
             data_type: 'dt_blank',
