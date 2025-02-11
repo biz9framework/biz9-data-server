@@ -1,4 +1,3 @@
-var request = require('request') , async = require('async')
 const { get_db_connect,close_db_connect,check_db_connect,update_item,update_item_list,get_item,delete_item,get_item_list,delete_item_list,count_item_list } = require("./");
 //const { get_id } = require("biz9-utility-server");
 const {get_guid,get_id} = require("biz9-utility-server");
