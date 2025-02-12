@@ -5,9 +5,9 @@ const {get_guid,get_id} = require("biz9-utility");
 
 /* --- TEST CONFIG START --- */
 //const ID = '0'; // 0 = intialize a new data item.
-const ID = '79384537-6ff2-4969-b913-4404951aff98';
+const ID = '40b5d44e-6ba4-410c-9fb5-f794c24cd350';
 const DATA_TYPE = 'blank_biz';
-const APP_TITLE_ID = 'db_title_feb10';
+const APP_TITLE_ID = 'db_title_feb_11';
 const SQL = {};
 /* --- TEST CONFIG END --- */
 
@@ -533,8 +533,8 @@ describe('test_item_delete', function(){ this.timeout(25000);
     });
 });
 //9_item_list 9_sql test_item_get_list
-describe('test_item_get_list', function(){ this.timeout(25000);
-    it("_test_item_get_list", function(done){
+describe('test_item_list_get', function(){ this.timeout(25000);
+    it("_test_item_list_get", function(done){
         let db_connect = {};
         let item_test_list = [];
         let sort_by = {};
@@ -604,8 +604,8 @@ describe('test_item_get_list', function(){ this.timeout(25000);
     });
 });
 //9_delete_item_list 9_sql test_item_delete_list 9_delete_list
-describe('test_item_delete_list', function(){ this.timeout(25000);
-    it("_test_item_delete_list", function(done){
+describe('test_item_list_delete', function(){ this.timeout(25000);
+    it("_test_item_list_delete", function(done){
         let db_connect = {};
         let item_test_list = [];
         async.series([

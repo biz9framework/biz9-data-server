@@ -68,7 +68,6 @@ router.get('/connect', function(req, res, next) {
      SSH_KEY:"",
      REDIS_URL:"0.0.0.0",
      REDIS_PORT_ID:"27019",
-     SERVICE_HOST_TYPE:"single" /* options = single, multiple*/
  };
  let dynamic_title = {
      app_title_id:'my_dynamic_app_title_id'
@@ -245,15 +244,8 @@ module.exports = router;
         SSH_KEY:"",
         REDIS_URL:"0.0.0.0",
         REDIS_PORT_ID:"27019",
-        SERVICE_HOST_TYPE:"single" /* options: single, multiple */
     };
     ```
-- dynamic_app_title_id / Dynamic app title id based on SERVICE_HOST_TYPE / options: single, multiple. / object
-    ```javascript
-    let dynamic_title = {
-        app_title_id:'my_dynamic_app_title_id'
-    };
-    ````
 
 #### Returns
 - error / Error message / string
@@ -271,13 +263,9 @@ let data_config = {
     SSH_KEY:"",
     REDIS_URL:"0.0.0.0",
     REDIS_PORT_ID:"27019",
-    SERVICE_HOST_TYPE:"single" /* options: single, multiple */
-};
-let dynamic_app_title_id = {
-app_title_id:'my_dynamic_app_title_id'
 };
 
-get_db_connect(data_config, dynamic_app_title_id).then(([error,data]) => {
+get_db_connect(data_config).then(([error,data]) => {
     db_connect = data;
 }).catch(error => {
     console.log(error);
