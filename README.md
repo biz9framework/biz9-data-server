@@ -69,9 +69,6 @@ router.get('/connect', function(req, res, next) {
      REDIS_URL:"0.0.0.0",
      REDIS_PORT_ID:"27019",
  };
- let dynamic_title = {
-     app_title_id:'my_dynamic_app_title_id'
- };
  let item =
      {
          data_type: 'dt_blank',
@@ -87,7 +84,7 @@ router.get('/connect', function(req, res, next) {
      function(call){
          console.log('BiZ9-Test-Connect');
 
-         get_db_connect(data_config, dynamic_title).then(([error,data]) => {
+         get_db_connect(data_config).then(([error,data]) => {
              db_connect = data;
              call();
          }).catch(error => {
